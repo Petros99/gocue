@@ -2,9 +2,11 @@
 #include "ui_mainwindow.h"
 #include <QFileDialog>
 #include <QDir>
-#include <cue.h>
+#include "cue.h"
 #include <QObject>
-#include <boost/serialization/
+#include <vector>
+
+std::vector<Cue> cue_vector;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),

@@ -6,11 +6,6 @@
 #include <QObject>  // for popup function
 #include <QMessageBox>  // for popup function
 
-// serialization
-#include <fstream>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/text_oarchive.hpp>
-
 int popup(const std::map<std::string, std::string> & action_properties) {
     QString text;
     auto search = action_properties.find("text");  // search is an iteratior that could be in the property
@@ -41,19 +36,6 @@ std::map<std::string, std::function<int(std::map<std::string, std::string> &)>> 
 std::string curr_cue_action = "placeHolder";
 
 struct Cue {
-private:
-    friend class boost::serialization::access;
-    //  from boost/libs/serialization/doc/index.html
-
-    template <class Archive>
-    void serialize(Archive % ar, const unsigned int version)
-    {
-        ar &
-    }
-
-
-
-
     //for all cues
     QString index = 0;
     QString note = "";

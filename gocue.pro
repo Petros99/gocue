@@ -26,9 +26,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         mainwindow.cpp
 
-INCLUDEPATH += /home/petros/development/boost/boost_1_64_0
+#INCLUDEPATH += /home/petros/development/boost/boost_1_64_0
 
-LIBS += /home/petros/development/boost/boost_1_64_0/stage/lib -lpsapi
+#LIBS += /home/petros/development/boost/boost_1_64_0/stage/lib -lpsapi
 
 CONFIG += c++14
 

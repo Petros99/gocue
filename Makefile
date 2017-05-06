@@ -15,7 +15,7 @@ CXX           = g++
 DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -lpthread -g -std=gnu++1y -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I. -I../../boost/boost_1_64_0 -I../../../Qt/5.8/gcc_64/include -I../../../Qt/5.8/gcc_64/include/QtWidgets -I../../../Qt/5.8/gcc_64/include/QtGui -I../../../Qt/5.8/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I. -I../../../Qt/5.8/gcc_64/mkspecs/linux-g++
+INCPATH       = -I. -I../../../Qt/5.8/gcc_64/include -I../../../Qt/5.8/gcc_64/include/QtWidgets -I../../../Qt/5.8/gcc_64/include/QtGui -I../../../Qt/5.8/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I. -I../../../Qt/5.8/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/petros/Qt/5.8/gcc_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -36,7 +36,7 @@ DISTNAME      = gocue1.0.0
 DISTDIR = /home/petros/development/gocue/gocue/.tmp/gocue1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/home/petros/Qt/5.8/gcc_64/lib
-LIBS          = $(SUBLIBS) /home/petros/development/boost/boost_1_64_0/stage/lib -lpsapi -L/home/petros/Qt/5.8/gcc_64/lib -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -L/home/petros/Qt/5.8/gcc_64/lib -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -104,6 +104,8 @@ DIST          = ../../../Qt/5.8/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_eventdispatcher_support_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_fb_support_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_fontdatabase_support_private.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_gamepad.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_gamepad_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_glx_support_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_gui.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_gui_private.pri \
@@ -133,6 +135,8 @@ DIST          = ../../../Qt/5.8/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_positioning_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_printsupport.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_printsupport_private.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_purchasing.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_purchasing_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_qml.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_qml_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_qmldebug_private.pri \
@@ -148,6 +152,10 @@ DIST          = ../../../Qt/5.8/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_quicktemplates2_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_quickwidgets.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_quickwidgets_private.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_script.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_script_private.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_scripttools.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_scripttools_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_scxml.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_scxml_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_sensors.pri \
@@ -163,12 +171,21 @@ DIST          = ../../../Qt/5.8/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_svg_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_testlib.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_testlib_private.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_texttospeech.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_texttospeech_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_theme_support_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_uiplugin.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_uitools.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_uitools_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webchannel.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webchannel_private.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webengine.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webengine_private.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webenginecore.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webenginecore_private.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webenginecoreheaders_private.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webenginewidgets.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webenginewidgets_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_websockets.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_websockets_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webview.pri \
@@ -271,6 +288,8 @@ Makefile: gocue.pro ../../../Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.conf ../../..
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_eventdispatcher_support_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_fb_support_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_fontdatabase_support_private.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_gamepad.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_gamepad_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_glx_support_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_gui.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_gui_private.pri \
@@ -300,6 +319,8 @@ Makefile: gocue.pro ../../../Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.conf ../../..
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_positioning_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_printsupport.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_printsupport_private.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_purchasing.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_purchasing_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_qml.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_qml_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_qmldebug_private.pri \
@@ -315,6 +336,10 @@ Makefile: gocue.pro ../../../Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.conf ../../..
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_quicktemplates2_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_quickwidgets.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_quickwidgets_private.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_script.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_script_private.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_scripttools.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_scripttools_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_scxml.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_scxml_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_sensors.pri \
@@ -330,12 +355,21 @@ Makefile: gocue.pro ../../../Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.conf ../../..
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_svg_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_testlib.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_testlib_private.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_texttospeech.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_texttospeech_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_theme_support_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_uiplugin.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_uitools.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_uitools_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webchannel.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webchannel_private.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webengine.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webengine_private.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webenginecore.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webenginecore_private.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webenginecoreheaders_private.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webenginewidgets.pri \
+		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webenginewidgets_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_websockets.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_websockets_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webview.pri \
@@ -429,6 +463,8 @@ Makefile: gocue.pro ../../../Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.conf ../../..
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_eventdispatcher_support_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_fb_support_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_fontdatabase_support_private.pri:
+../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_gamepad.pri:
+../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_gamepad_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_glx_support_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_gui.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_gui_private.pri:
@@ -458,6 +494,8 @@ Makefile: gocue.pro ../../../Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.conf ../../..
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_positioning_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_printsupport.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_printsupport_private.pri:
+../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_purchasing.pri:
+../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_purchasing_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_qml.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_qml_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_qmldebug_private.pri:
@@ -473,6 +511,10 @@ Makefile: gocue.pro ../../../Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.conf ../../..
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_quicktemplates2_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_quickwidgets.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_quickwidgets_private.pri:
+../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_script.pri:
+../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_script_private.pri:
+../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_scripttools.pri:
+../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_scripttools_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_scxml.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_scxml_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_sensors.pri:
@@ -488,12 +530,21 @@ Makefile: gocue.pro ../../../Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.conf ../../..
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_svg_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_testlib.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_testlib_private.pri:
+../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_texttospeech.pri:
+../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_texttospeech_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_theme_support_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_uiplugin.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_uitools.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_uitools_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webchannel.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webchannel_private.pri:
+../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webengine.pri:
+../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webengine_private.pri:
+../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webenginecore.pri:
+../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webenginecore_private.pri:
+../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webenginecoreheaders_private.pri:
+../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webenginewidgets.pri:
+../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webenginewidgets_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_websockets.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_websockets_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webview.pri:
@@ -925,7 +976,7 @@ moc_mainwindow.cpp: ../../../Qt/5.8/gcc_64/include/QtWidgets/QMainWindow \
 		mainwindow.h \
 		moc_predefs.h \
 		../../../Qt/5.8/gcc_64/bin/moc
-	/home/petros/Qt/5.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/petros/Qt/5.8/gcc_64/mkspecs/linux-g++ -I/home/petros/development/gocue/gocue -I/home/petros/development/boost/boost_1_64_0 -I/home/petros/Qt/5.8/gcc_64/include -I/home/petros/Qt/5.8/gcc_64/include/QtWidgets -I/home/petros/Qt/5.8/gcc_64/include/QtGui -I/home/petros/Qt/5.8/gcc_64/include/QtCore -I/usr/include/c++/6 -I/usr/include/x86_64-linux-gnu/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/x86_64-linux-gnu/6/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainwindow.h -o moc_mainwindow.cpp
+	/home/petros/Qt/5.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/petros/Qt/5.8/gcc_64/mkspecs/linux-g++ -I/home/petros/development/gocue/gocue -I/home/petros/Qt/5.8/gcc_64/include -I/home/petros/Qt/5.8/gcc_64/include/QtWidgets -I/home/petros/Qt/5.8/gcc_64/include/QtGui -I/home/petros/Qt/5.8/gcc_64/include/QtCore -I/usr/include/c++/6 -I/usr/include/x86_64-linux-gnu/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/x86_64-linux-gnu/6/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainwindow.h -o moc_mainwindow.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:

@@ -6,7 +6,6 @@
 #include <QTreeWidget>
 #include <QtGui>
 #include <QMessageBox>
-#include "cue.h"
 
 
 namespace Ui {
@@ -53,7 +52,5 @@ int error_message(QString text){
     msgBox.setIcon(QMessageBox::Warning);
     return msgBox.exec();
 }
-
-std::vector<Cue> cue_vector;
 
 #endif // MAINWINDOW_H

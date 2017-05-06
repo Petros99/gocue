@@ -132,7 +132,7 @@
 #define __UINT8_TYPE__ unsigned char
 #define __NO_INLINE__ 1
 #define __FLT_MANT_DIG__ 24
-#define __VERSION__ "6.3.0 20170321"
+#define __VERSION__ "6.3.0 20170406"
 #define __UINT64_C(c) c ## UL
 #define __cpp_unicode_characters 200704
 #define _STDC_PREDEF_H 1
