@@ -6,6 +6,15 @@
 #include <QObject>
 #include <vector>
 
+int error_message(QString text){
+    // opens an error message
+    QMessageBox msgBox;
+    msgBox.setText("There was an error.");
+    msgBox.setInformativeText(text);
+    msgBox.setIcon(QMessageBox::Warning);
+    return msgBox.exec();
+}
+
 std::vector<Cue> cue_vector;
 
 MainWindow::MainWindow(QWidget *parent) :

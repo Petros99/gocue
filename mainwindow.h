@@ -44,13 +44,4 @@ private:
     Ui::MainWindow *ui;
 };
 
-int error_message(QString text){
-    // opens an error message
-    QMessageBox msgBox;
-    msgBox.setText("There was an error.");
-    msgBox.setInformativeText(text);
-    msgBox.setIcon(QMessageBox::Warning);
-    return msgBox.exec();
-}
-
 #endif // MAINWINDOW_H

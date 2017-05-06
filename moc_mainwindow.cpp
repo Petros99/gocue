@@ -105,10 +105,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 2: _t->on_add_clicked(); break;
         case 3: _t->on_remove_clicked(); break;
         case 4: _t->on_action_select_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 5: _t->on_cue_list_editingFinished(); break;
-        case 6: _t->on_pushButton_4_clicked(); break;
-        case 7: _t->on_cue_note_returnPressed(); break;
-        case 8: _t->on_actionsave_triggered(); break;
+        case 5: _t->on_actionsave_triggered(); break;
         default: ;
         }
     }
