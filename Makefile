@@ -104,8 +104,6 @@ DIST          = ../../../Qt/5.8/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_eventdispatcher_support_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_fb_support_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_fontdatabase_support_private.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_gamepad.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_gamepad_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_glx_support_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_gui.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_gui_private.pri \
@@ -135,8 +133,6 @@ DIST          = ../../../Qt/5.8/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_positioning_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_printsupport.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_printsupport_private.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_purchasing.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_purchasing_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_qml.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_qml_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_qmldebug_private.pri \
@@ -152,10 +148,6 @@ DIST          = ../../../Qt/5.8/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_quicktemplates2_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_quickwidgets.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_quickwidgets_private.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_script.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_script_private.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_scripttools.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_scripttools_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_scxml.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_scxml_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_sensors.pri \
@@ -171,21 +163,12 @@ DIST          = ../../../Qt/5.8/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_svg_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_testlib.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_testlib_private.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_texttospeech.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_texttospeech_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_theme_support_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_uiplugin.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_uitools.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_uitools_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webchannel.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webchannel_private.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webengine.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webengine_private.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webenginecore.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webenginecore_private.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webenginecoreheaders_private.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webenginewidgets.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webenginewidgets_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_websockets.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_websockets_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webview.pri \
@@ -288,8 +271,6 @@ Makefile: gocue.pro ../../../Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.conf ../../..
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_eventdispatcher_support_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_fb_support_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_fontdatabase_support_private.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_gamepad.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_gamepad_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_glx_support_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_gui.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_gui_private.pri \
@@ -319,8 +300,6 @@ Makefile: gocue.pro ../../../Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.conf ../../..
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_positioning_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_printsupport.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_printsupport_private.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_purchasing.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_purchasing_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_qml.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_qml_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_qmldebug_private.pri \
@@ -336,10 +315,6 @@ Makefile: gocue.pro ../../../Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.conf ../../..
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_quicktemplates2_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_quickwidgets.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_quickwidgets_private.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_script.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_script_private.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_scripttools.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_scripttools_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_scxml.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_scxml_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_sensors.pri \
@@ -355,21 +330,12 @@ Makefile: gocue.pro ../../../Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.conf ../../..
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_svg_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_testlib.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_testlib_private.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_texttospeech.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_texttospeech_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_theme_support_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_uiplugin.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_uitools.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_uitools_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webchannel.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webchannel_private.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webengine.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webengine_private.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webenginecore.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webenginecore_private.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webenginecoreheaders_private.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webenginewidgets.pri \
-		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webenginewidgets_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_websockets.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_websockets_private.pri \
 		../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webview.pri \
@@ -463,8 +429,6 @@ Makefile: gocue.pro ../../../Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.conf ../../..
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_eventdispatcher_support_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_fb_support_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_fontdatabase_support_private.pri:
-../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_gamepad.pri:
-../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_gamepad_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_glx_support_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_gui.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_gui_private.pri:
@@ -494,8 +458,6 @@ Makefile: gocue.pro ../../../Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.conf ../../..
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_positioning_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_printsupport.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_printsupport_private.pri:
-../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_purchasing.pri:
-../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_purchasing_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_qml.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_qml_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_qmldebug_private.pri:
@@ -511,10 +473,6 @@ Makefile: gocue.pro ../../../Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.conf ../../..
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_quicktemplates2_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_quickwidgets.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_quickwidgets_private.pri:
-../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_script.pri:
-../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_script_private.pri:
-../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_scripttools.pri:
-../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_scripttools_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_scxml.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_scxml_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_sensors.pri:
@@ -530,21 +488,12 @@ Makefile: gocue.pro ../../../Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.conf ../../..
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_svg_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_testlib.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_testlib_private.pri:
-../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_texttospeech.pri:
-../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_texttospeech_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_theme_support_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_uiplugin.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_uitools.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_uitools_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webchannel.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webchannel_private.pri:
-../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webengine.pri:
-../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webengine_private.pri:
-../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webenginecore.pri:
-../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webenginecore_private.pri:
-../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webenginecoreheaders_private.pri:
-../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webenginewidgets.pri:
-../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webenginewidgets_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_websockets.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_websockets_private.pri:
 ../../../Qt/5.8/gcc_64/mkspecs/modules/qt_lib_webview.pri:
@@ -971,8 +920,6 @@ moc_mainwindow.cpp: ../../../Qt/5.8/gcc_64/include/QtWidgets/QMainWindow \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/QMessageBox \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qmessagebox.h \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qdialog.h \
-		cue.h \
-		../../../Qt/5.8/gcc_64/include/QtCore/QString \
 		mainwindow.h \
 		moc_predefs.h \
 		../../../Qt/5.8/gcc_64/bin/moc
@@ -997,9 +944,8 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_ui
 
 ####### Compile
 
-main.o: main.cpp mainwindow.h \
-		../../../Qt/5.8/gcc_64/include/QtWidgets/QMainWindow \
-		../../../Qt/5.8/gcc_64/include/QtWidgets/qmainwindow.h \
+main.o: main.cpp ../../../Qt/5.8/gcc_64/include/QtWidgets/QApplication \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qapplication.h \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
 		../../../Qt/5.8/gcc_64/include/QtGui/qtguiglobal.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qglobal.h \
@@ -1026,19 +972,17 @@ main.o: main.cpp mainwindow.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qversiontagging.h \
 		../../../Qt/5.8/gcc_64/include/QtGui/qtgui-config.h \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qtwidgets-config.h \
-		../../../Qt/5.8/gcc_64/include/QtWidgets/qwidget.h \
-		../../../Qt/5.8/gcc_64/include/QtGui/qwindowdefs.h \
-		../../../Qt/5.8/gcc_64/include/QtCore/qobjectdefs.h \
-		../../../Qt/5.8/gcc_64/include/QtCore/qnamespace.h \
-		../../../Qt/5.8/gcc_64/include/QtCore/qobjectdefs_impl.h \
-		../../../Qt/5.8/gcc_64/include/QtGui/qwindowdefs_win.h \
-		../../../Qt/5.8/gcc_64/include/QtCore/qobject.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qcoreapplication.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qstring.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qchar.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qbytearray.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qrefcount.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qnamespace.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qarraydata.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qobject.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qobjectdefs_impl.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qlist.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qalgorithms.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qiterator.h \
@@ -1054,11 +998,17 @@ main.o: main.cpp mainwindow.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qvarlengtharray.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qcontainerfwd.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qobject_impl.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qeventloop.h \
+		../../../Qt/5.8/gcc_64/include/QtGui/qwindowdefs.h \
+		../../../Qt/5.8/gcc_64/include/QtGui/qwindowdefs_win.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qpoint.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qsize.h \
+		../../../Qt/5.8/gcc_64/include/QtGui/qcursor.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qwidget.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qmargins.h \
 		../../../Qt/5.8/gcc_64/include/QtGui/qpaintdevice.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qrect.h \
-		../../../Qt/5.8/gcc_64/include/QtCore/qsize.h \
-		../../../Qt/5.8/gcc_64/include/QtCore/qpoint.h \
 		../../../Qt/5.8/gcc_64/include/QtGui/qpalette.h \
 		../../../Qt/5.8/gcc_64/include/QtGui/qcolor.h \
 		../../../Qt/5.8/gcc_64/include/QtGui/qrgb.h \
@@ -1084,7 +1034,6 @@ main.o: main.cpp mainwindow.h \
 		../../../Qt/5.8/gcc_64/include/QtGui/qfontmetrics.h \
 		../../../Qt/5.8/gcc_64/include/QtGui/qfontinfo.h \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qsizepolicy.h \
-		../../../Qt/5.8/gcc_64/include/QtGui/qcursor.h \
 		../../../Qt/5.8/gcc_64/include/QtGui/qkeysequence.h \
 		../../../Qt/5.8/gcc_64/include/QtGui/qevent.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qvariant.h \
@@ -1100,13 +1049,17 @@ main.o: main.cpp mainwindow.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qfiledevice.h \
 		../../../Qt/5.8/gcc_64/include/QtGui/qvector2d.h \
 		../../../Qt/5.8/gcc_64/include/QtGui/qtouchdevice.h \
+		../../../Qt/5.8/gcc_64/include/QtGui/qguiapplication.h \
+		../../../Qt/5.8/gcc_64/include/QtGui/qinputmethod.h \
+		mainwindow.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/QMainWindow \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../Qt/5.8/gcc_64/include/QtGui/qicon.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/QtCore \
 		../../../Qt/5.8/gcc_64/include/QtCore/QtCoreDepends \
 		../../../Qt/5.8/gcc_64/include/QtCore/qabstractanimation.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qabstracteventdispatcher.h \
-		../../../Qt/5.8/gcc_64/include/QtCore/qeventloop.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qabstractitemmodel.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qabstractnativeeventfilter.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qabstractproxymodel.h \
@@ -1123,7 +1076,6 @@ main.o: main.cpp mainwindow.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qcollator.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qcommandlineoption.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qcommandlineparser.h \
-		../../../Qt/5.8/gcc_64/include/QtCore/qcoreapplication.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qcryptographichash.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qdatetime.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qdeadlinetimer.h \
@@ -1260,8 +1212,6 @@ main.o: main.cpp mainwindow.h \
 		../../../Qt/5.8/gcc_64/include/QtGui/qgenericmatrix.h \
 		../../../Qt/5.8/gcc_64/include/QtGui/qgenericplugin.h \
 		../../../Qt/5.8/gcc_64/include/QtGui/qgenericpluginfactory.h \
-		../../../Qt/5.8/gcc_64/include/QtGui/qguiapplication.h \
-		../../../Qt/5.8/gcc_64/include/QtGui/qinputmethod.h \
 		../../../Qt/5.8/gcc_64/include/QtGui/qiconengine.h \
 		../../../Qt/5.8/gcc_64/include/QtGui/qiconengineplugin.h \
 		../../../Qt/5.8/gcc_64/include/QtGui/qimageiohandler.h \
@@ -1330,12 +1280,7 @@ main.o: main.cpp mainwindow.h \
 		../../../Qt/5.8/gcc_64/include/QtGui/qtguiversion.h \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/QMessageBox \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qmessagebox.h \
-		../../../Qt/5.8/gcc_64/include/QtWidgets/qdialog.h \
-		cue.h \
-		../../../Qt/5.8/gcc_64/include/QtCore/QString \
-		../../../Qt/5.8/gcc_64/include/QtWidgets/QApplication \
-		../../../Qt/5.8/gcc_64/include/QtWidgets/qapplication.h \
-		../../../Qt/5.8/gcc_64/include/QtWidgets/qdesktopwidget.h
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qdialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 mainwindow.o: mainwindow.cpp mainwindow.h \
@@ -1672,8 +1617,6 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/QMessageBox \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qmessagebox.h \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qdialog.h \
-		cue.h \
-		../../../Qt/5.8/gcc_64/include/QtCore/QString \
 		ui_mainwindow.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/QVariant \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/QAction \
@@ -1704,11 +1647,14 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qabstractbutton.h \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/QStatusBar \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qstatusbar.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/QTreeView \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/QVBoxLayout \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/QWidget \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/QFileDialog \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qfiledialog.h \
-		../../../Qt/5.8/gcc_64/include/QtCore/QDir
+		../../../Qt/5.8/gcc_64/include/QtCore/QDir \
+		cue.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QString
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 

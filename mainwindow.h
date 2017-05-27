@@ -6,6 +6,7 @@
 #include <QTreeWidget>
 #include <QtGui>
 #include <QMessageBox>
+#include "cue.h"
 
 
 namespace Ui {
@@ -32,13 +33,11 @@ private slots:
 
     void on_action_select_currentIndexChanged(const QString &arg1);
 
-    void on_cue_list_editingFinished();
-
-    void on_pushButton_4_clicked();
-
     void on_cue_note_returnPressed();
 
     void on_actionsave_triggered();
+
+    void insertCue(Cue const & cue);
 
 private:
     Ui::MainWindow *ui;

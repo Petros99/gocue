@@ -6,48 +6,28 @@
 #include <QObject>  // for popup function
 #include <QMessageBox>  // for popup function
 
-int popup(const std::map<std::string, std::string> & action_properties) {
-    QString text;
-    auto search = action_properties.find("text");  // search is an iteratior that could be in the property
-    if (search != action_properties.end()) {
-        text = QObject::tr(search->second.c_str());
-    }
-    else {
-        text = QObject::tr("default text");
-    }
-
-    QMessageBox popup;
-    popup.setText(text);
-    return popup.exec();
-}
-
-
-// maps action strings to functions
-std::map<std::string, std::function<int(std::map<std::string, std::string> &)>> cue_actions =
-{
-    {"placeHolder", popup},
-    {"placeHolder1", popup},
-    {"placeHolder2", popup},
-    {"placeHolder3", popup},
-    {"placeHolder4", popup},
-    {"placeHolder5", popup}
-};
-
-std::string curr_cue_action = "placeHolder";
-
-struct Cue {
-    //for all cues
-    QString index = 0;
+class Cue {
+public:
+    Cue() = default;
     QString note = "";
-    std::string action = "placeHolder";  // maps to a function that does something
-    // change to Qmap?
-    std::map<std::string, std::string> action_properties;  // holds the properties for action
-
-    int go() {
-        return cue_actions[action](action_properties);
+    virtual int go() {
+        QMessageBox box;
+        box.setWindowTitle("default cue action");
+        box.setText("this cue has the defalt action, that is bad");
+        return box.exec();
     }
-
 };
 
+class ActionPopup : public Cue {
+public:
+    QString text = "";
+    QString title = "Message";
+    int go() override final {
+        QMessageBox box;
+        box.setWindowTitle(title);
+        box.setText(text);
+        return box.exec();
+    }
+};
 
 #endif // CUE_H

@@ -5,6 +5,8 @@
 #include "cue.h"
 #include <QObject>
 #include <vector>
+#include <QString>
+#include <QDebug>
 
 int error_message(QString text){
     // opens an error message
@@ -16,6 +18,8 @@ int error_message(QString text){
 }
 
 std::vector<Cue> cue_vector;
+int curr_cue_action_index = 0; // popup
+QStringList possible_actions = {"popup"};
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -23,89 +27,101 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    {  // setup cue_list
-    ui->cue_list->setColumnCount(3);
-    ui->cue_list->setHeaderLabels(QStringList()
-                                  << "number"
-                                  << "action"
-                                  << "note");
-    }
+    // action_select dropdown
+    ui->action_select->addItems(possible_actions);
 
-    QStringList actions;
-    for (auto const & it:cue_actions) {
-        actions << it.first.c_str();
-    }
-    ui->action_select->addItems(actions);
-
+    // the qTableWidget cue_list
+    ui->cue_list->setColumnCount(2);
+    QStringList headers;
+    headers << "note" << "action";
+    ui->cue_list->setHorizontalHeaderLabels(headers);
+    ui->cue_list->setShowGrid(false);
+    ui->cue_list->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->cue_list->setSelectionMode(QAbstractItemView::SingleSelection);
 }
+
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
 
-void MainWindow::addCue(int index, std::string action = "placeHolder", QString note = "")
-{
-    QTreeWidgetItem * itm = new QTreeWidgetItem(ui->cue_list);
-    itm->setText(0, QString::number(index));
-    itm->setText(1, tr(action.c_str()));
-    itm->setText(2, note);
-    ui->cue_list->addTopLevelItem(itm);
-    Cue new_cue;
-    new_cue.action = action;
-    new_cue.index = index;
-    new_cue.note = note;
-    cue_vector.push_back(new_cue);
+void MainWindow::insertCue(Cue const & cue) {
+    int index = ui->cue_list->currentRow();
+    // if none selected, insert at end
+    if (index == -1) index = cue_vector.size();
+    for (int i = cue_vector.size() - 1; i > index; --i) {
+        ui->cue_list->setItem(i, 0, ui->cue_list->item(i - 1, 0));
+        ui->cue_list->setItem(i, 1, ui->cue_list->item(i - 1, 1));
+    }
+
+    ui->cue_list->setRowCount(ui->cue_list->rowCount() + 1);
+    QTableWidgetItem * note_itm = new QTableWidgetItem();
+    note_itm->setText(cue.note);
+
+    QTableWidgetItem * action_itm = new QTableWidgetItem();
+    action_itm->setText(possible_actions.at(curr_cue_action_index));
+    ui->cue_list->setItem(index, 0, note_itm);
+    ui->cue_list->setItem(index, 1, action_itm);
+
+    cue_vector.insert(cue_vector.begin() + index, cue);
+    qDebug() << "the cue_vector contains " << cue_vector.size();
 }
+
 
 void MainWindow::on_actionopen_triggered()
 {
+    /*
      QString cueListFileName = QFileDialog::getOpenFileName(this, tr("Open Cue List"), "", tr("CSV files (*.csv)"));
      qDebug(cueListFileName.toLatin1());
+     */
 }
 
 void MainWindow::on_go_button_clicked()
 {
-    qDebug("GO pushed");
-    Cue test_cue;
-    test_cue.go();
+    //
 }
 
 void MainWindow::on_add_clicked()
 {
-    MainWindow::addCue(0, curr_cue_action, ui->cue_note->text());
+    // the cue types are listed in possible_actions
+    switch (ui->action_select->currentIndex()) {
+    case 0:  // the first is popup
+    {
+        ActionPopup cue;
+        cue.note = ui->cue_note->text();
+        insertCue(cue);
+        break;
+    }
+    default:  // should never happen
+    {
+        Cue cue;
+        cue.note = ui->cue_note->text();
+        insertCue(cue);
+        break;
+    }
+    }
 }
 
 void MainWindow::on_remove_clicked()
 {
+    /*
     int selected_row = ui->cue_list->currentIndex().row();
     if (selected_row == -1) selected_row = 0;  // if no row is selected, use first row
     ui->cue_list->takeTopLevelItem(selected_row);
+    */
 }
 
 void MainWindow::on_action_select_currentIndexChanged(const QString &arg1)
 {
-    curr_cue_action = ui->action_select->currentText().toStdString();
+    curr_cue_action_index = ui->action_select->currentIndex();
 }
 
 void MainWindow::on_actionsave_triggered()
 {
-    //TODO
-     QString f_name = QFileDialog::getSaveFileName(this,
-                                                   QObject::tr("Select Save File"));
-                                                   //QDir::homePath);
-//                                                   QObject::tr("CSV Files (*.csv)"));
-     QFile file(f_name);
-
-    if (!file.open(QIODevice::WriteOnly)) {
-        error_message(f_name);
-        return;
-    }
-
-    QDataStream out(&file);
-    out.setVersion(QDataStream::Qt_5_8);
-
-
-   file.flush();
-   file.close();
 }
+
+void MainWindow::on_cue_note_returnPressed(){
+    //
+}
+

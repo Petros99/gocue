@@ -22,7 +22,7 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QTreeWidget>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -36,7 +36,6 @@ public:
     QAction *actionsave;
     QAction *actionquit;
     QWidget *centralWidget;
-    QTreeWidget *cue_list;
     QWidget *layoutWidget;
     QVBoxLayout *verticalLayout;
     QPushButton *go_button;
@@ -45,6 +44,8 @@ public:
     QPushButton *pushButton_5;
     QPushButton *pushButton_4;
     QWidget *layoutWidget1;
+    QVBoxLayout *verticalLayout_2;
+    QTableWidget *cue_list;
     QHBoxLayout *horizontalLayout;
     QComboBox *action_select;
     QLineEdit *cue_note;
@@ -70,27 +71,6 @@ public:
         actionquit->setObjectName(QStringLiteral("actionquit"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        cue_list = new QTreeWidget(centralWidget);
-        QTreeWidgetItem *__qtreewidgetitem = new QTreeWidgetItem();
-        __qtreewidgetitem->setText(0, QStringLiteral("index"));
-        cue_list->setHeaderItem(__qtreewidgetitem);
-        cue_list->setObjectName(QStringLiteral("cue_list"));
-        cue_list->setGeometry(QRect(140, 10, 501, 521));
-        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(cue_list->sizePolicy().hasHeightForWidth());
-        cue_list->setSizePolicy(sizePolicy);
-        cue_list->setMinimumSize(QSize(0, 0));
-        cue_list->setMaximumSize(QSize(800, 800));
-        cue_list->viewport()->setProperty("cursor", QVariant(QCursor(Qt::ArrowCursor)));
-        cue_list->setAutoExpandDelay(0);
-        cue_list->setAnimated(true);
-        cue_list->setHeaderHidden(false);
-        cue_list->header()->setHighlightSections(false);
-        cue_list->header()->setMinimumSectionSize(10);
-        cue_list->header()->setProperty("showSortIndicator", QVariant(false));
-        cue_list->header()->setStretchLastSection(true);
         layoutWidget = new QWidget(centralWidget);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
         layoutWidget->setGeometry(QRect(23, 13, 100, 210));
@@ -128,12 +108,20 @@ public:
 
         layoutWidget1 = new QWidget(centralWidget);
         layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(130, 540, 501, 28));
-        horizontalLayout = new QHBoxLayout(layoutWidget1);
+        layoutWidget1->setGeometry(QRect(130, 10, 431, 551));
+        verticalLayout_2 = new QVBoxLayout(layoutWidget1);
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
+        cue_list = new QTableWidget(layoutWidget1);
+        cue_list->setObjectName(QStringLiteral("cue_list"));
+
+        verticalLayout_2->addWidget(cue_list);
+
+        horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
-        horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        horizontalLayout->setContentsMargins(0, 0, 0, 0);
         action_select = new QComboBox(layoutWidget1);
         action_select->setObjectName(QStringLiteral("action_select"));
         action_select->setMinimumSize(QSize(0, 0));
@@ -156,6 +144,9 @@ public:
         remove->setMaximumSize(QSize(60, 50));
 
         horizontalLayout->addWidget(remove);
+
+
+        verticalLayout_2->addLayout(horizontalLayout);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
@@ -188,9 +179,6 @@ public:
         actionnew->setText(QApplication::translate("MainWindow", "new", Q_NULLPTR));
         actionsave->setText(QApplication::translate("MainWindow", "save", Q_NULLPTR));
         actionquit->setText(QApplication::translate("MainWindow", "quit", Q_NULLPTR));
-        QTreeWidgetItem *___qtreewidgetitem = cue_list->headerItem();
-        ___qtreewidgetitem->setText(2, QApplication::translate("MainWindow", "note", Q_NULLPTR));
-        ___qtreewidgetitem->setText(1, QApplication::translate("MainWindow", "action", Q_NULLPTR));
         go_button->setText(QApplication::translate("MainWindow", "GO", Q_NULLPTR));
         pushButton_7->setText(QApplication::translate("MainWindow", "back", Q_NULLPTR));
         pushButton_3->setText(QApplication::translate("MainWindow", "freeze", Q_NULLPTR));
