@@ -9,13 +9,12 @@
 #include <QDebug>
 #include <QJsonArray>
 
-QVector<Cue *> cue_vector;
-int current_row = 0;
-int curr_cue_action_index = 0; // popup
+QVector<Cue *> cue_vector;  // holds every cue in order
+int current_row = 0;  // for cue_list gui element
+int curr_cue_action_index = 0; // popup action is index 0
 QStringList possible_actions = {"popup", "sound"};
 
-void MainWindow::set_cue_list() {
-     // the qTableWidget cue_list
+void MainWindow::set_cue_list() {  // "reset" the cue_list element
     ui->cue_list->setColumnCount(2);
     QStringList headers;
     headers << "note" << "action";
@@ -28,38 +27,31 @@ void MainWindow::set_cue_list() {
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
-{
+    ui(new Ui::MainWindow) {
     ui->setupUi(this);
-
-    // action_select dropdown
-    ui->action_select->addItems(possible_actions);
-
+    ui->action_select->addItems(possible_actions); // action_select dropdown
     set_cue_list();
-
    }
 
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow() {
     delete ui;
 }
 
 void MainWindow::insertCue(Cue * cue) {
     int index = ui->cue_list->currentRow();
-    // if none selected, insert at end
-    if (index == -1) index = cue_vector.size();
+    if (index == -1) index = cue_vector.size();  // if none selected, insert at end
 
-    ui->cue_list->insertRow(index);
+    ui->cue_list->insertRow(index);  // insert new row into the gui element
     QTableWidgetItem * note_itm = new QTableWidgetItem();
-    note_itm->setText(cue->note);
+    note_itm->setText(cue->note);  // add the text to the note item
 
     QTableWidgetItem * action_itm = new QTableWidgetItem();
-    action_itm->setText(possible_actions.at(curr_cue_action_index));
-    ui->cue_list->setItem(index, 0, note_itm);
-    ui->cue_list->setItem(index, 1, action_itm);
+    action_itm->setText(possible_actions.at(curr_cue_action_index));  // add the text which describes the action
+    ui->cue_list->setItem(index, 0, note_itm);  // put in the note item into cue_list
+    ui->cue_list->setItem(index, 1, action_itm);  // put the action item into the cue_list
 
-    cue_vector.insert(cue_vector.begin() + index, cue);
+    cue_vector.insert(cue_vector.begin() + index, cue);  // add the cue to the vector
     qDebug() << "the cue_vector contains " << cue_vector.size();
 }
 
@@ -85,7 +77,7 @@ void MainWindow::newCue(int type, QString note) {
     }
     case 1:
     {
-        // should not use the default constructor when opening from file
+        // TODO should not use the default constructor when opening from file
         ActionPlayAudioFile * cue = new ActionPlayAudioFile;
         cue->note = note;
         insertCue(cue);
@@ -109,7 +101,7 @@ void MainWindow::on_add_clicked()
 
 void MainWindow::on_remove_clicked()
 {
-
+    // TODO
 }
 
 void MainWindow::on_actionopen_triggered() {
@@ -122,26 +114,29 @@ void MainWindow::on_actionopen_triggered() {
         qWarning("Could not open file.");
     }
 
-    QByteArray in_data = in_file.readAll();
+    QByteArray in_data = in_file.readAll();  // file to byte array
 
-
-    QJsonParseError error;
+    QJsonParseError error;  // holds errors
     QJsonDocument json_cues_doc = QJsonDocument::fromJson(in_data, &error);
 
     qDebug() << error.errorString();
     qDebug() << in_data.at(error.offset);
-    qDebug() << json_cues_doc.isNull();
+    qDebug() << json_cues_doc.isNull();  // should not be null
 
     QJsonArray json_cues_vector = json_cues_doc.array();
+     // byte array to json array
 
+    // reset stuffs
     cue_vector.clear();
     ui->cue_list->clear();
     set_cue_list();
 
     for (int i = 0; i < json_cues_vector.size(); ++i) {
         QJsonObject current_json_obj = json_cues_vector.at(i).toObject();
+        // vector item to json object
         qDebug() << "adding " << current_json_obj["note"].toString();
         newCue(current_json_obj["type"].toInt(), current_json_obj["note"].toString());
+        // json object to a cue, which is added to cue_vector
     }
 
 }
@@ -163,32 +158,29 @@ void MainWindow::on_actionsave_triggered()
     for(int i = 0; i < cue_vector.size(); ++i) {
         QJsonObject json_cue_obj;
         cue_vector.at(i)->write(json_cue_obj);
+        // cue_vector to json cue vector
         cues.append(json_cue_obj);
     }
 
     QJsonDocument json_cues_doc;
     json_cues_doc.setArray(cues);
 
+    // json cue vector to json doc
+
     QDataStream out (&out_file);
 //    out.setVersion(QDataStream::Qt_DefaultCompiledVersion);
 
     qDebug() << json_cues_doc.toJson();
 
-    // outputing char by char removes extranious chars present when
-//    out << out_text;
-    // is used
     QString out_text = json_cues_doc.toJson();
- //   for (int i = 0; i < out_text.size(); ++i) {
-//        out << out_text.at(i);
-
+    // json doc to text
     out << out_text;
-//    }
+    // text to file
     out_file.close();
 }
 
 void MainWindow::on_cue_note_returnPressed(){
 }
-
 
 void MainWindow::on_action_select_currentIndexChanged()
 {
