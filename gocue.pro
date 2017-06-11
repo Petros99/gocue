@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui multimedia multimediawidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -31,8 +31,6 @@ SOURCES += main.cpp\
 #LIBS += /home/petros/development/boost/boost_1_64_0/stage/lib -lpsapi
 
 CONFIG += c++14
-
-QMAKE_CXXFLAGS += -lpthread
 
 HEADERS  += mainwindow.h \
     cue.h

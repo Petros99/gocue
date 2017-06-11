@@ -31,13 +31,17 @@ private slots:
 
     void on_remove_clicked();
 
-    void on_action_select_currentIndexChanged(const QString &arg1);
-
     void on_cue_note_returnPressed();
 
     void on_actionsave_triggered();
 
-    void insertCue(Cue const & cue);
+    void insertCue(Cue * cue);
+
+    void newCue(int type, QString note);
+
+    void on_action_select_currentIndexChanged();
+
+    void set_cue_list();
 
 private:
     Ui::MainWindow *ui;

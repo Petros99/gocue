@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
     QByteArrayData data[13];
-    char stringdata0[200];
+    char stringdata0[202];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,22 +37,21 @@ QT_MOC_LITERAL(2, 35, 0), // ""
 QT_MOC_LITERAL(3, 36, 20), // "on_go_button_clicked"
 QT_MOC_LITERAL(4, 57, 14), // "on_add_clicked"
 QT_MOC_LITERAL(5, 72, 17), // "on_remove_clicked"
-QT_MOC_LITERAL(6, 90, 36), // "on_action_select_currentIndex..."
-QT_MOC_LITERAL(7, 127, 4), // "arg1"
-QT_MOC_LITERAL(8, 132, 25), // "on_cue_note_returnPressed"
-QT_MOC_LITERAL(9, 158, 23), // "on_actionsave_triggered"
-QT_MOC_LITERAL(10, 182, 9), // "insertCue"
-QT_MOC_LITERAL(11, 192, 3), // "Cue"
-QT_MOC_LITERAL(12, 196, 3) // "cue"
+QT_MOC_LITERAL(6, 90, 25), // "on_cue_note_returnPressed"
+QT_MOC_LITERAL(7, 116, 23), // "on_actionsave_triggered"
+QT_MOC_LITERAL(8, 140, 9), // "insertCue"
+QT_MOC_LITERAL(9, 150, 4), // "Cue*"
+QT_MOC_LITERAL(10, 155, 3), // "cue"
+QT_MOC_LITERAL(11, 159, 36), // "on_action_select_currentIndex..."
+QT_MOC_LITERAL(12, 196, 5) // "index"
 
     },
     "MainWindow\0on_actionopen_triggered\0\0"
     "on_go_button_clicked\0on_add_clicked\0"
-    "on_remove_clicked\0"
-    "on_action_select_currentIndexChanged\0"
-    "arg1\0on_cue_note_returnPressed\0"
-    "on_actionsave_triggered\0insertCue\0Cue\0"
-    "cue"
+    "on_remove_clicked\0on_cue_note_returnPressed\0"
+    "on_actionsave_triggered\0insertCue\0"
+    "Cue*\0cue\0on_action_select_currentIndexChanged\0"
+    "index"
 };
 #undef QT_MOC_LITERAL
 
@@ -74,20 +73,20 @@ static const uint qt_meta_data_MainWindow[] = {
        3,    0,   55,    2, 0x08 /* Private */,
        4,    0,   56,    2, 0x08 /* Private */,
        5,    0,   57,    2, 0x08 /* Private */,
-       6,    1,   58,    2, 0x08 /* Private */,
-       8,    0,   61,    2, 0x08 /* Private */,
-       9,    0,   62,    2, 0x08 /* Private */,
-      10,    1,   63,    2, 0x08 /* Private */,
+       6,    0,   58,    2, 0x08 /* Private */,
+       7,    0,   59,    2, 0x08 /* Private */,
+       8,    1,   60,    2, 0x08 /* Private */,
+      11,    1,   63,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,    7,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 11,   12,
+    QMetaType::Void, 0x80000000 | 9,   10,
+    QMetaType::Void, QMetaType::Int,   12,
 
        0        // eod
 };
@@ -102,10 +101,10 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 1: _t->on_go_button_clicked(); break;
         case 2: _t->on_add_clicked(); break;
         case 3: _t->on_remove_clicked(); break;
-        case 4: _t->on_action_select_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 5: _t->on_cue_note_returnPressed(); break;
-        case 6: _t->on_actionsave_triggered(); break;
-        case 7: _t->insertCue((*reinterpret_cast< const Cue(*)>(_a[1]))); break;
+        case 4: _t->on_cue_note_returnPressed(); break;
+        case 5: _t->on_actionsave_triggered(); break;
+        case 6: _t->insertCue((*reinterpret_cast< Cue*(*)>(_a[1]))); break;
+        case 7: _t->on_action_select_currentIndexChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     }

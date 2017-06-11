@@ -4,22 +4,27 @@
 #include <QDir>
 #include "cue.h"
 #include <QObject>
-#include <vector>
+#include <QVector>
 #include <QString>
 #include <QDebug>
+#include <QJsonArray>
 
-int error_message(QString text){
-    // opens an error message
-    QMessageBox msgBox;
-    msgBox.setText("There was an error.");
-    msgBox.setInformativeText(text);
-    msgBox.setIcon(QMessageBox::Warning);
-    return msgBox.exec();
-}
-
-std::vector<Cue> cue_vector;
+QVector<Cue *> cue_vector;
+int current_row = 0;
 int curr_cue_action_index = 0; // popup
-QStringList possible_actions = {"popup"};
+QStringList possible_actions = {"popup", "sound"};
+
+void MainWindow::set_cue_list() {
+     // the qTableWidget cue_list
+    ui->cue_list->setColumnCount(2);
+    QStringList headers;
+    headers << "note" << "action";
+    ui->cue_list->setHorizontalHeaderLabels(headers);
+    ui->cue_list->setShowGrid(false);
+    ui->cue_list->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->cue_list->setSelectionMode(QAbstractItemView::SingleSelection);
+
+}
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -30,15 +35,9 @@ MainWindow::MainWindow(QWidget *parent) :
     // action_select dropdown
     ui->action_select->addItems(possible_actions);
 
-    // the qTableWidget cue_list
-    ui->cue_list->setColumnCount(2);
-    QStringList headers;
-    headers << "note" << "action";
-    ui->cue_list->setHorizontalHeaderLabels(headers);
-    ui->cue_list->setShowGrid(false);
-    ui->cue_list->setSelectionBehavior(QAbstractItemView::SelectRows);
-    ui->cue_list->setSelectionMode(QAbstractItemView::SingleSelection);
-}
+    set_cue_list();
+
+   }
 
 
 MainWindow::~MainWindow()
@@ -46,18 +45,14 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::insertCue(Cue const & cue) {
+void MainWindow::insertCue(Cue * cue) {
     int index = ui->cue_list->currentRow();
     // if none selected, insert at end
     if (index == -1) index = cue_vector.size();
-    for (int i = cue_vector.size() - 1; i > index; --i) {
-        ui->cue_list->setItem(i, 0, ui->cue_list->item(i - 1, 0));
-        ui->cue_list->setItem(i, 1, ui->cue_list->item(i - 1, 1));
-    }
 
-    ui->cue_list->setRowCount(ui->cue_list->rowCount() + 1);
+    ui->cue_list->insertRow(index);
     QTableWidgetItem * note_itm = new QTableWidgetItem();
-    note_itm->setText(cue.note);
+    note_itm->setText(cue->note);
 
     QTableWidgetItem * action_itm = new QTableWidgetItem();
     action_itm->setText(possible_actions.at(curr_cue_action_index));
@@ -69,59 +64,133 @@ void MainWindow::insertCue(Cue const & cue) {
 }
 
 
-void MainWindow::on_actionopen_triggered()
-{
-    /*
-     QString cueListFileName = QFileDialog::getOpenFileName(this, tr("Open Cue List"), "", tr("CSV files (*.csv)"));
-     qDebug(cueListFileName.toLatin1());
-     */
-}
-
 void MainWindow::on_go_button_clicked()
 {
-    //
+    // ensures current_row is never -1
+    if (ui->cue_list->currentRow() != -1) current_row = ui->cue_list->currentRow();
+    cue_vector.at(current_row)->go();
+    ui->cue_list->selectRow(current_row + 1);  // go to next row
 }
 
-void MainWindow::on_add_clicked()
-{
-    // the cue types are listed in possible_actions
-    switch (ui->action_select->currentIndex()) {
-    case 0:  // the first is popup
+void MainWindow::newCue(int type, QString note) {
+     // the cue types are listed in possible_actions
+    switch (type) {
+    case 0:
     {
-        ActionPopup cue;
-        cue.note = ui->cue_note->text();
+        ActionPopup * cue = new ActionPopup;
+        cue->note = note;
+        insertCue(cue);
+        break;
+
+    }
+    case 1:
+    {
+        // should not use the default constructor when opening from file
+        ActionPlayAudioFile * cue = new ActionPlayAudioFile;
+        cue->note = note;
         insertCue(cue);
         break;
     }
     default:  // should never happen
     {
-        Cue cue;
-        cue.note = ui->cue_note->text();
+        Cue * cue = new Cue;
+        cue->note = note;
         insertCue(cue);
+        qWarning("Something bad happened in newCue(default).");
         break;
     }
     }
 }
 
-void MainWindow::on_remove_clicked()
+void MainWindow::on_add_clicked()
 {
-    /*
-    int selected_row = ui->cue_list->currentIndex().row();
-    if (selected_row == -1) selected_row = 0;  // if no row is selected, use first row
-    ui->cue_list->takeTopLevelItem(selected_row);
-    */
+    newCue(ui->action_select->currentIndex(), ui->cue_note->text());
 }
 
-void MainWindow::on_action_select_currentIndexChanged(const QString &arg1)
+void MainWindow::on_remove_clicked()
 {
-    curr_cue_action_index = ui->action_select->currentIndex();
+
 }
+
+void MainWindow::on_actionopen_triggered() {
+    QString f_name = QFileDialog::getOpenFileName(nullptr, tr("Open File"),
+                                                    "",
+                                                    tr("JSON (*.json)"));
+    QFile in_file(f_name);
+
+    if (!in_file.open(QIODevice::ReadOnly)) {
+        qWarning("Could not open file.");
+    }
+
+    QByteArray in_data = in_file.readAll();
+
+
+    QJsonParseError error;
+    QJsonDocument json_cues_doc = QJsonDocument::fromJson(in_data, &error);
+
+    qDebug() << error.errorString();
+    qDebug() << in_data.at(error.offset);
+    qDebug() << json_cues_doc.isNull();
+
+    QJsonArray json_cues_vector = json_cues_doc.array();
+
+    cue_vector.clear();
+    ui->cue_list->clear();
+    set_cue_list();
+
+    for (int i = 0; i < json_cues_vector.size(); ++i) {
+        QJsonObject current_json_obj = json_cues_vector.at(i).toObject();
+        qDebug() << "adding " << current_json_obj["note"].toString();
+        newCue(current_json_obj["type"].toInt(), current_json_obj["note"].toString());
+    }
+
+}
+
 
 void MainWindow::on_actionsave_triggered()
 {
+    QString f_name = QFileDialog::getSaveFileName(nullptr, tr("Save File"),
+                                "",
+                                tr("JSON (*.json)"));
+    QFile out_file(f_name);
+    if (!out_file.open(QIODevice::WriteOnly)) {
+        qWarning("Could not save file!");
+        return;
+    }
+
+
+    QJsonArray cues;
+    for(int i = 0; i < cue_vector.size(); ++i) {
+        QJsonObject json_cue_obj;
+        cue_vector.at(i)->write(json_cue_obj);
+        cues.append(json_cue_obj);
+    }
+
+    QJsonDocument json_cues_doc;
+    json_cues_doc.setArray(cues);
+
+    QDataStream out (&out_file);
+//    out.setVersion(QDataStream::Qt_DefaultCompiledVersion);
+
+    qDebug() << json_cues_doc.toJson();
+
+    // outputing char by char removes extranious chars present when
+//    out << out_text;
+    // is used
+    QString out_text = json_cues_doc.toJson();
+ //   for (int i = 0; i < out_text.size(); ++i) {
+//        out << out_text.at(i);
+
+    out << out_text;
+//    }
+    out_file.close();
 }
 
 void MainWindow::on_cue_note_returnPressed(){
-    //
 }
 
+
+void MainWindow::on_action_select_currentIndexChanged()
+{
+    curr_cue_action_index = ui->action_select->currentIndex();
+}

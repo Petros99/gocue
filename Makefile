@@ -12,10 +12,10 @@ MAKEFILE      = Makefile
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_MULTIMEDIAWIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -D_REENTRANT
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-CXXFLAGS      = -pipe -lpthread -g -std=gnu++1y -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I. -I../../../Qt/5.8/gcc_64/include -I../../../Qt/5.8/gcc_64/include/QtWidgets -I../../../Qt/5.8/gcc_64/include/QtGui -I../../../Qt/5.8/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I. -I../../../Qt/5.8/gcc_64/mkspecs/linux-g++
+CXXFLAGS      = -pipe -g -std=gnu++1y -Wall -W -D_REENTRANT -fPIC $(DEFINES)
+INCPATH       = -I. -I../../../Qt/5.8/gcc_64/include -I../../../Qt/5.8/gcc_64/include/QtMultimediaWidgets -I../../../Qt/5.8/gcc_64/include/QtMultimedia -I../../../Qt/5.8/gcc_64/include/QtWidgets -I../../../Qt/5.8/gcc_64/include/QtGui -I../../../Qt/5.8/gcc_64/include/QtNetwork -I../../../Qt/5.8/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I. -isystem /usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I../../../Qt/5.8/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/petros/Qt/5.8/gcc_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -35,8 +35,8 @@ COMPRESS      = gzip -9f
 DISTNAME      = gocue1.0.0
 DISTDIR = /home/petros/development/gocue/gocue/.tmp/gocue1.0.0
 LINK          = g++
-LFLAGS        = -Wl,-rpath,/home/petros/Qt/5.8/gcc_64/lib
-LIBS          = $(SUBLIBS) -L/home/petros/Qt/5.8/gcc_64/lib -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
+LFLAGS        = -Wl,-rpath,/home/petros/Qt/5.8/gcc_64/lib -Wl,-rpath-link,/home/petros/Qt/5.8/gcc_64/lib
+LIBS          = $(SUBLIBS) -L/home/petros/Qt/5.8/gcc_64/lib -lQt5MultimediaWidgets -lQt5Multimedia -lQt5Widgets -lQt5Gui -lQt5Network -lQt5Core -lGL -lpthread -lpulse-mainloop-glib -lpulse -lglib-2.0 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -374,8 +374,11 @@ Makefile: gocue.pro ../../../Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.conf ../../..
 		../../../Qt/5.8/gcc_64/mkspecs/features/yacc.prf \
 		../../../Qt/5.8/gcc_64/mkspecs/features/lex.prf \
 		gocue.pro \
+		../../../Qt/5.8/gcc_64/lib/libQt5MultimediaWidgets.prl \
+		../../../Qt/5.8/gcc_64/lib/libQt5Multimedia.prl \
 		../../../Qt/5.8/gcc_64/lib/libQt5Widgets.prl \
 		../../../Qt/5.8/gcc_64/lib/libQt5Gui.prl \
+		../../../Qt/5.8/gcc_64/lib/libQt5Network.prl \
 		../../../Qt/5.8/gcc_64/lib/libQt5Core.prl
 	$(QMAKE) -o Makefile gocue.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
 ../../../Qt/5.8/gcc_64/mkspecs/features/spec_pre.prf:
@@ -532,8 +535,11 @@ Makefile: gocue.pro ../../../Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.conf ../../..
 ../../../Qt/5.8/gcc_64/mkspecs/features/yacc.prf:
 ../../../Qt/5.8/gcc_64/mkspecs/features/lex.prf:
 gocue.pro:
+../../../Qt/5.8/gcc_64/lib/libQt5MultimediaWidgets.prl:
+../../../Qt/5.8/gcc_64/lib/libQt5Multimedia.prl:
 ../../../Qt/5.8/gcc_64/lib/libQt5Widgets.prl:
 ../../../Qt/5.8/gcc_64/lib/libQt5Gui.prl:
+../../../Qt/5.8/gcc_64/lib/libQt5Network.prl:
 ../../../Qt/5.8/gcc_64/lib/libQt5Core.prl:
 qmake: FORCE
 	@$(QMAKE) -o Makefile gocue.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
@@ -582,7 +588,7 @@ compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
 moc_predefs.h: ../../../Qt/5.8/gcc_64/mkspecs/features/data/dummy.cpp
-	g++ -pipe -lpthread -g -std=gnu++1y -Wall -W -dM -E -o moc_predefs.h ../../../Qt/5.8/gcc_64/mkspecs/features/data/dummy.cpp
+	g++ -pipe -g -std=gnu++1y -Wall -W -dM -E -o moc_predefs.h ../../../Qt/5.8/gcc_64/mkspecs/features/data/dummy.cpp
 
 compiler_moc_header_make_all: moc_mainwindow.cpp
 compiler_moc_header_clean:
@@ -920,10 +926,31 @@ moc_mainwindow.cpp: ../../../Qt/5.8/gcc_64/include/QtWidgets/QMainWindow \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/QMessageBox \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qmessagebox.h \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qdialog.h \
+		cue.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QString \
+		../../../Qt/5.8/gcc_64/include/QtCore/QDebug \
+		../../../Qt/5.8/gcc_64/include/QtMultimedia/QMediaPlayer \
+		../../../Qt/5.8/gcc_64/include/QtMultimedia/qmediaplayer.h \
+		../../../Qt/5.8/gcc_64/include/QtMultimedia/qmediaobject.h \
+		../../../Qt/5.8/gcc_64/include/QtMultimedia/qtmultimediaglobal.h \
+		../../../Qt/5.8/gcc_64/include/QtMultimedia/qtmultimedia-config.h \
+		../../../Qt/5.8/gcc_64/include/QtMultimedia/qmultimedia.h \
+		../../../Qt/5.8/gcc_64/include/QtMultimedia/qmediacontent.h \
+		../../../Qt/5.8/gcc_64/include/QtMultimedia/qmediaresource.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkrequest.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qtnetworkglobal.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qtnetwork-config.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QUrl \
+		../../../Qt/5.8/gcc_64/include/QtCore/QVariant \
+		../../../Qt/5.8/gcc_64/include/QtMultimedia/qmediaenumdebug.h \
+		../../../Qt/5.8/gcc_64/include/QtMultimedia/qaudio.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkconfiguration.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/QFileDialog \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qfiledialog.h \
 		mainwindow.h \
 		moc_predefs.h \
 		../../../Qt/5.8/gcc_64/bin/moc
-	/home/petros/Qt/5.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/petros/Qt/5.8/gcc_64/mkspecs/linux-g++ -I/home/petros/development/gocue/gocue -I/home/petros/Qt/5.8/gcc_64/include -I/home/petros/Qt/5.8/gcc_64/include/QtWidgets -I/home/petros/Qt/5.8/gcc_64/include/QtGui -I/home/petros/Qt/5.8/gcc_64/include/QtCore -I/usr/include/c++/6 -I/usr/include/x86_64-linux-gnu/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/x86_64-linux-gnu/6/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainwindow.h -o moc_mainwindow.cpp
+	/home/petros/Qt/5.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/petros/Qt/5.8/gcc_64/mkspecs/linux-g++ -I/home/petros/development/gocue/gocue -I/home/petros/Qt/5.8/gcc_64/include -I/home/petros/Qt/5.8/gcc_64/include/QtMultimediaWidgets -I/home/petros/Qt/5.8/gcc_64/include/QtMultimedia -I/home/petros/Qt/5.8/gcc_64/include/QtWidgets -I/home/petros/Qt/5.8/gcc_64/include/QtGui -I/home/petros/Qt/5.8/gcc_64/include/QtNetwork -I/home/petros/Qt/5.8/gcc_64/include/QtCore -I/usr/include/c++/6 -I/usr/include/x86_64-linux-gnu/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/x86_64-linux-gnu/6/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainwindow.h -o moc_mainwindow.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -1280,7 +1307,28 @@ main.o: main.cpp ../../../Qt/5.8/gcc_64/include/QtWidgets/QApplication \
 		../../../Qt/5.8/gcc_64/include/QtGui/qtguiversion.h \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/QMessageBox \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qmessagebox.h \
-		../../../Qt/5.8/gcc_64/include/QtWidgets/qdialog.h
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qdialog.h \
+		cue.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QString \
+		../../../Qt/5.8/gcc_64/include/QtCore/QDebug \
+		../../../Qt/5.8/gcc_64/include/QtMultimedia/QMediaPlayer \
+		../../../Qt/5.8/gcc_64/include/QtMultimedia/qmediaplayer.h \
+		../../../Qt/5.8/gcc_64/include/QtMultimedia/qmediaobject.h \
+		../../../Qt/5.8/gcc_64/include/QtMultimedia/qtmultimediaglobal.h \
+		../../../Qt/5.8/gcc_64/include/QtMultimedia/qtmultimedia-config.h \
+		../../../Qt/5.8/gcc_64/include/QtMultimedia/qmultimedia.h \
+		../../../Qt/5.8/gcc_64/include/QtMultimedia/qmediacontent.h \
+		../../../Qt/5.8/gcc_64/include/QtMultimedia/qmediaresource.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkrequest.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qtnetworkglobal.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qtnetwork-config.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QUrl \
+		../../../Qt/5.8/gcc_64/include/QtCore/QVariant \
+		../../../Qt/5.8/gcc_64/include/QtMultimedia/qmediaenumdebug.h \
+		../../../Qt/5.8/gcc_64/include/QtMultimedia/qaudio.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkconfiguration.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/QFileDialog \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qfiledialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 mainwindow.o: mainwindow.cpp mainwindow.h \
@@ -1617,8 +1665,28 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/QMessageBox \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qmessagebox.h \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qdialog.h \
-		ui_mainwindow.h \
+		cue.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QString \
+		../../../Qt/5.8/gcc_64/include/QtCore/QDebug \
+		../../../Qt/5.8/gcc_64/include/QtMultimedia/QMediaPlayer \
+		../../../Qt/5.8/gcc_64/include/QtMultimedia/qmediaplayer.h \
+		../../../Qt/5.8/gcc_64/include/QtMultimedia/qmediaobject.h \
+		../../../Qt/5.8/gcc_64/include/QtMultimedia/qtmultimediaglobal.h \
+		../../../Qt/5.8/gcc_64/include/QtMultimedia/qtmultimedia-config.h \
+		../../../Qt/5.8/gcc_64/include/QtMultimedia/qmultimedia.h \
+		../../../Qt/5.8/gcc_64/include/QtMultimedia/qmediacontent.h \
+		../../../Qt/5.8/gcc_64/include/QtMultimedia/qmediaresource.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkrequest.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qtnetworkglobal.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qtnetwork-config.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QUrl \
 		../../../Qt/5.8/gcc_64/include/QtCore/QVariant \
+		../../../Qt/5.8/gcc_64/include/QtMultimedia/qmediaenumdebug.h \
+		../../../Qt/5.8/gcc_64/include/QtMultimedia/qaudio.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkconfiguration.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/QFileDialog \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qfiledialog.h \
+		ui_mainwindow.h \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/QAction \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qaction.h \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qactiongroup.h \
@@ -1647,14 +1715,12 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qabstractbutton.h \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/QStatusBar \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qstatusbar.h \
-		../../../Qt/5.8/gcc_64/include/QtWidgets/QTreeView \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/QTableWidget \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qtablewidget.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qtableview.h \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/QVBoxLayout \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/QWidget \
-		../../../Qt/5.8/gcc_64/include/QtWidgets/QFileDialog \
-		../../../Qt/5.8/gcc_64/include/QtWidgets/qfiledialog.h \
-		../../../Qt/5.8/gcc_64/include/QtCore/QDir \
-		cue.h \
-		../../../Qt/5.8/gcc_64/include/QtCore/QString
+		../../../Qt/5.8/gcc_64/include/QtCore/QDir
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
