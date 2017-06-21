@@ -79,7 +79,7 @@ public:
     int go() override final {
         QMediaPlayer * player = new QMediaPlayer;
         player->setMedia(QUrl::fromLocalFile(audio_file_name));
-        // TODO should set low-latency flag
+        //player->Flag = QMediaPlayer::LowLatency;
         player->setVolume(volume);
         player->play();  // not blocking
         return 1;

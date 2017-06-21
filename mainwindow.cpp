@@ -167,7 +167,7 @@ void MainWindow::on_actionsave_triggered()
 
     // json cue vector to json doc
 
-    QDataStream out (&out_file);
+    QTextStream out (&out_file);
 //    out.setVersion(QDataStream::Qt_DefaultCompiledVersion);
 
     qDebug() << json_cues_doc.toJson();
