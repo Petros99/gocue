@@ -14,15 +14,21 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QComboBox>
+#include <QtWidgets/QFrame>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSlider>
+#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTableWidget>
+#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -51,6 +57,19 @@ public:
     QLineEdit *cue_note;
     QPushButton *add;
     QPushButton *remove;
+    QFrame *actionPopupSettings;
+    QLineEdit *actionPopupTitleEntry;
+    QTextEdit *actionPopupTextEntry;
+    QFrame *actionPlayAudioFileSettings;
+    QWidget *layoutWidget2;
+    QHBoxLayout *horizontalLayout_2;
+    QLabel *volumeControlLabel;
+    QGridLayout *gridLayout;
+    QSpinBox *volumeControl_spin;
+    QSlider *volumeControl_slide;
+    QFrame *actionNoneSettings;
+    QVBoxLayout *verticalLayout_3;
+    QLabel *no_selected_cue_label;
     QMenuBar *menuBar;
     QMenu *menugocue;
     QStatusBar *statusBar;
@@ -59,7 +78,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(1265, 621);
+        MainWindow->resize(944, 621);
         MainWindow->setAcceptDrops(false);
         actionopen = new QAction(MainWindow);
         actionopen->setObjectName(QStringLiteral("actionopen"));
@@ -148,10 +167,94 @@ public:
 
         verticalLayout_2->addLayout(horizontalLayout);
 
+        actionPopupSettings = new QFrame(centralWidget);
+        actionPopupSettings->setObjectName(QStringLiteral("actionPopupSettings"));
+        actionPopupSettings->setGeometry(QRect(570, 10, 331, 521));
+        actionPopupSettings->setAutoFillBackground(false);
+        actionPopupSettings->setFrameShape(QFrame::StyledPanel);
+        actionPopupSettings->setFrameShadow(QFrame::Sunken);
+        actionPopupTitleEntry = new QLineEdit(actionPopupSettings);
+        actionPopupTitleEntry->setObjectName(QStringLiteral("actionPopupTitleEntry"));
+        actionPopupTitleEntry->setGeometry(QRect(1, 1, 330, 26));
+        actionPopupTextEntry = new QTextEdit(actionPopupSettings);
+        actionPopupTextEntry->setObjectName(QStringLiteral("actionPopupTextEntry"));
+        actionPopupTextEntry->setGeometry(QRect(1, 27, 330, 70));
+        actionPlayAudioFileSettings = new QFrame(centralWidget);
+        actionPlayAudioFileSettings->setObjectName(QStringLiteral("actionPlayAudioFileSettings"));
+        actionPlayAudioFileSettings->setGeometry(QRect(570, 10, 331, 521));
+        actionPlayAudioFileSettings->setFrameShape(QFrame::StyledPanel);
+        actionPlayAudioFileSettings->setFrameShadow(QFrame::Sunken);
+        layoutWidget2 = new QWidget(actionPlayAudioFileSettings);
+        layoutWidget2->setObjectName(QStringLiteral("layoutWidget2"));
+        layoutWidget2->setGeometry(QRect(0, 0, 331, 31));
+        horizontalLayout_2 = new QHBoxLayout(layoutWidget2);
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        horizontalLayout_2->setContentsMargins(3, 0, 0, 0);
+        volumeControlLabel = new QLabel(layoutWidget2);
+        volumeControlLabel->setObjectName(QStringLiteral("volumeControlLabel"));
+        QFont font;
+        font.setBold(false);
+        font.setUnderline(false);
+        font.setWeight(50);
+        font.setStrikeOut(false);
+        font.setKerning(true);
+        volumeControlLabel->setFont(font);
+        volumeControlLabel->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_2->addWidget(volumeControlLabel);
+
+        gridLayout = new QGridLayout();
+        gridLayout->setSpacing(6);
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        gridLayout->setContentsMargins(-1, 0, -1, -1);
+        volumeControl_spin = new QSpinBox(layoutWidget2);
+        volumeControl_spin->setObjectName(QStringLiteral("volumeControl_spin"));
+        volumeControl_spin->setMaximum(100);
+
+        gridLayout->addWidget(volumeControl_spin, 0, 0, 1, 1);
+
+        volumeControl_slide = new QSlider(layoutWidget2);
+        volumeControl_slide->setObjectName(QStringLiteral("volumeControl_slide"));
+        volumeControl_slide->setAutoFillBackground(false);
+        volumeControl_slide->setMaximum(100);
+        volumeControl_slide->setValue(100);
+        volumeControl_slide->setOrientation(Qt::Horizontal);
+        volumeControl_slide->setInvertedAppearance(false);
+        volumeControl_slide->setInvertedControls(false);
+        volumeControl_slide->setTickPosition(QSlider::NoTicks);
+        volumeControl_slide->setTickInterval(0);
+
+        gridLayout->addWidget(volumeControl_slide, 0, 1, 1, 1);
+
+
+        horizontalLayout_2->addLayout(gridLayout);
+
+        actionNoneSettings = new QFrame(centralWidget);
+        actionNoneSettings->setObjectName(QStringLiteral("actionNoneSettings"));
+        actionNoneSettings->setGeometry(QRect(570, 10, 331, 521));
+        actionNoneSettings->setFrameShape(QFrame::StyledPanel);
+        actionNoneSettings->setFrameShadow(QFrame::Raised);
+        verticalLayout_3 = new QVBoxLayout(actionNoneSettings);
+        verticalLayout_3->setSpacing(6);
+        verticalLayout_3->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        no_selected_cue_label = new QLabel(actionNoneSettings);
+        no_selected_cue_label->setObjectName(QStringLiteral("no_selected_cue_label"));
+        no_selected_cue_label->setAlignment(Qt::AlignCenter);
+
+        verticalLayout_3->addWidget(no_selected_cue_label);
+
         MainWindow->setCentralWidget(centralWidget);
+        layoutWidget->raise();
+        layoutWidget->raise();
+        actionPlayAudioFileSettings->raise();
+        actionNoneSettings->raise();
+        actionPopupSettings->raise();
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1265, 20));
+        menuBar->setGeometry(QRect(0, 0, 944, 23));
         menugocue = new QMenu(menuBar);
         menugocue->setObjectName(QStringLiteral("menugocue"));
         MainWindow->setMenuBar(menuBar);
@@ -188,6 +291,11 @@ public:
         cue_note->setPlaceholderText(QApplication::translate("MainWindow", "enter note", Q_NULLPTR));
         add->setText(QApplication::translate("MainWindow", "add", Q_NULLPTR));
         remove->setText(QApplication::translate("MainWindow", "remove", Q_NULLPTR));
+        actionPopupTitleEntry->setText(QString());
+        actionPopupTitleEntry->setPlaceholderText(QApplication::translate("MainWindow", "popup title", Q_NULLPTR));
+        actionPopupTextEntry->setPlaceholderText(QApplication::translate("MainWindow", "popup text", Q_NULLPTR));
+        volumeControlLabel->setText(QApplication::translate("MainWindow", "volume", Q_NULLPTR));
+        no_selected_cue_label->setText(QApplication::translate("MainWindow", "please select a cue", Q_NULLPTR));
         menugocue->setTitle(QApplication::translate("MainWindow", "File", Q_NULLPTR));
     } // retranslateUi
 

@@ -9,7 +9,7 @@
 #include <QDebug>
 #include <QJsonArray>
 
-QVector<Cue *> cue_vector;  // holds every cue in order
+QVector<Cue *> cue_vector;  // holds pointers to every cue in order
 int current_row = 0;  // for cue_list gui element
 int curr_cue_action_index = 0; // popup action is index 0
 QStringList possible_actions = {"popup", "sound"};
@@ -25,12 +25,21 @@ void MainWindow::set_cue_list() {  // "reset" the cue_list element
 
 }
 
+void MainWindow::clear_actionSettings() {  // hide settings for all cue groups and no cue
+    ui->actionPlayAudioFileSettings->hide();
+    ui->actionPopupSettings->hide();
+    ui->actionNoneSettings->hide();
+}
+
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow) {
     ui->setupUi(this);
     ui->action_select->addItems(possible_actions); // action_select dropdown
     set_cue_list();
+    clear_actionSettings();
+    ui->actionNoneSettings->show();
    }
 
 
@@ -39,20 +48,25 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::insertCue(Cue * cue) {
-    int index = ui->cue_list->currentRow();
-    if (index == -1) index = cue_vector.size();  // if none selected, insert at end
-
-    ui->cue_list->insertRow(index);  // insert new row into the gui element
     QTableWidgetItem * note_itm = new QTableWidgetItem();
     note_itm->setText(cue->note);  // add the text to the note item
 
     QTableWidgetItem * action_itm = new QTableWidgetItem();
     action_itm->setText(possible_actions.at(curr_cue_action_index));  // add the text which describes the action
+
+    int index = ui->cue_list->currentRow();
+    if (index == -1) {  // index is at end
+        index = cue_vector.size();  // set to end
+     }
+    else {  // index is not at end
+        ++index;  // set to act on next item
+     }
+
+    ui->cue_list->insertRow(index);  // insert new row into the gui element
     ui->cue_list->setItem(index, 0, note_itm);  // put in the note item into cue_list
     ui->cue_list->setItem(index, 1, action_itm);  // put the action item into the cue_list
-
     cue_vector.insert(cue_vector.begin() + index, cue);  // add the cue to the vector
-    qDebug() << "the cue_vector contains " << cue_vector.size();
+
 }
 
 
@@ -77,7 +91,6 @@ void MainWindow::newCue(int type, QString note) {
     }
     case 1:
     {
-        // TODO should not use the default constructor when opening from file
         ActionPlayAudioFile * cue = new ActionPlayAudioFile;
         cue->note = note;
         insertCue(cue);
@@ -88,7 +101,7 @@ void MainWindow::newCue(int type, QString note) {
         Cue * cue = new Cue;
         cue->note = note;
         insertCue(cue);
-        qWarning("Something bad happened in newCue(default).");
+        qWarning("Something bad happened in newCue (default).");
         break;
     }
     }
@@ -101,7 +114,28 @@ void MainWindow::on_add_clicked()
 
 void MainWindow::on_remove_clicked()
 {
-    // TODO
+    int index = ui->cue_list->currentRow();
+    if (cue_vector.isEmpty()) return;  // do nothing if no cues
+    if (index == -1) return;  // do nothing if no cue selected
+    if (cue_vector.size() == 1) {  // the last cue
+        ui->cue_list->removeRow(0);
+        ui->cue_list->clearContents();
+        cue_vector.remove(index);
+        clear_actionSettings();
+        return;
+    }
+    if (index > 0) {
+        // select cue above
+        ui->cue_list->selectRow(index - 1);
+    }
+
+    else {
+        // select cue below
+        ui->cue_list->selectRow(index + 1);
+    }
+    cue_vector.remove(index);
+    ui->cue_list->removeRow(index);  // TODO crashes the program
+    if (cue_vector.size() == index) ui->cue_list->selectRow(index -1);
 }
 
 void MainWindow::on_actionopen_triggered() {
@@ -119,10 +153,6 @@ void MainWindow::on_actionopen_triggered() {
     QJsonParseError error;  // holds errors
     QJsonDocument json_cues_doc = QJsonDocument::fromJson(in_data, &error);
 
-    qDebug() << error.errorString();
-    qDebug() << in_data.at(error.offset);
-    qDebug() << json_cues_doc.isNull();  // should not be null
-
     QJsonArray json_cues_vector = json_cues_doc.array();
      // byte array to json array
 
@@ -134,7 +164,6 @@ void MainWindow::on_actionopen_triggered() {
     for (int i = 0; i < json_cues_vector.size(); ++i) {
         QJsonObject current_json_obj = json_cues_vector.at(i).toObject();
         // vector item to json object
-        qDebug() << "adding " << current_json_obj["note"].toString();
         newCue(current_json_obj["type"].toInt(), current_json_obj["note"].toString());
         // json object to a cue, which is added to cue_vector
     }
@@ -170,8 +199,6 @@ void MainWindow::on_actionsave_triggered()
     QTextStream out (&out_file);
 //    out.setVersion(QDataStream::Qt_DefaultCompiledVersion);
 
-    qDebug() << json_cues_doc.toJson();
-
     QString out_text = json_cues_doc.toJson();
     // json doc to text
     out << out_text;
@@ -179,10 +206,36 @@ void MainWindow::on_actionsave_triggered()
     out_file.close();
 }
 
-void MainWindow::on_cue_note_returnPressed(){
-}
-
 void MainWindow::on_action_select_currentIndexChanged()
 {
     curr_cue_action_index = ui->action_select->currentIndex();
+}
+
+void MainWindow::on_cue_list_itemSelectionChanged()
+{
+    clear_actionSettings();
+    if (ui->cue_list->rowCount() == 1) return;  // if this is the last item
+    cue_vector.at(ui->cue_list->currentItem()->row())->show_ui(MainWindow::ui);
+}
+
+void MainWindow::on_volumeControl_slide_valueChanged(int value)
+{
+   ((ActionPlayAudioFile *)cue_vector.at(ui->cue_list->currentItem()->row()))->volume = value;
+   ui->volumeControl_spin->setValue(value);
+}
+
+void MainWindow::on_volumeControl_spin_valueChanged(int value)
+{
+   ((ActionPlayAudioFile *)cue_vector.at(ui->cue_list->currentItem()->row()))->volume = value;
+   ui->volumeControl_slide->setValue(value);
+}
+
+void MainWindow::on_actionPopupTitleEntry_editingFinished()
+{
+   ((ActionPopup *)cue_vector.at(ui->cue_list->currentItem()->row()))->title = ui->actionPopupTitleEntry->text();
+}
+
+void MainWindow::on_actionPopupTextEntry_textChanged()
+{
+    ((ActionPopup *)cue_vector.at(ui->cue_list->currentItem()->row()))->text = ui->actionPopupTextEntry->toPlainText();
 }
