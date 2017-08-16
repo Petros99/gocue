@@ -1,0 +1,7 @@
+ui code should be seperated
+controls for audio playback cue
+is ready function
+settings file
+special cues
+-cue with sub cues
+-preset group cues

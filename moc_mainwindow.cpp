@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[23];
-    char stringdata0[413];
+    QByteArrayData data[25];
+    char stringdata0[489];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -53,7 +53,9 @@ QT_MOC_LITERAL(18, 290, 5), // "value"
 QT_MOC_LITERAL(19, 296, 34), // "on_volumeControl_spin_valueCh..."
 QT_MOC_LITERAL(20, 331, 4), // "arg1"
 QT_MOC_LITERAL(21, 336, 40), // "on_actionPopupTitleEntry_edit..."
-QT_MOC_LITERAL(22, 377, 35) // "on_actionPopupTextEntry_textC..."
+QT_MOC_LITERAL(22, 377, 35), // "on_actionPopupTextEntry_textC..."
+QT_MOC_LITERAL(23, 413, 32), // "on_selectAudioFileButton_clicked"
+QT_MOC_LITERAL(24, 446, 42) // "on_selectAudioFileLineEdit_ed..."
 
     },
     "MainWindow\0on_actionopen_triggered\0\0"
@@ -66,7 +68,9 @@ QT_MOC_LITERAL(22, 377, 35) // "on_actionPopupTextEntry_textC..."
     "on_volumeControl_slide_valueChanged\0"
     "value\0on_volumeControl_spin_valueChanged\0"
     "arg1\0on_actionPopupTitleEntry_editingFinished\0"
-    "on_actionPopupTextEntry_textChanged"
+    "on_actionPopupTextEntry_textChanged\0"
+    "on_selectAudioFileButton_clicked\0"
+    "on_selectAudioFileLineEdit_editingFinished"
 };
 #undef QT_MOC_LITERAL
 
@@ -76,7 +80,7 @@ static const uint qt_meta_data_MainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      15,   14, // methods
+      17,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -84,21 +88,23 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   89,    2, 0x08 /* Private */,
-       3,    0,   90,    2, 0x08 /* Private */,
-       4,    0,   91,    2, 0x08 /* Private */,
-       5,    0,   92,    2, 0x08 /* Private */,
-       6,    0,   93,    2, 0x08 /* Private */,
-       7,    1,   94,    2, 0x08 /* Private */,
-      10,    2,   97,    2, 0x08 /* Private */,
-      13,    0,  102,    2, 0x08 /* Private */,
-      14,    0,  103,    2, 0x08 /* Private */,
-      15,    0,  104,    2, 0x08 /* Private */,
-      16,    0,  105,    2, 0x08 /* Private */,
-      17,    1,  106,    2, 0x08 /* Private */,
-      19,    1,  109,    2, 0x08 /* Private */,
-      21,    0,  112,    2, 0x08 /* Private */,
-      22,    0,  113,    2, 0x08 /* Private */,
+       1,    0,   99,    2, 0x08 /* Private */,
+       3,    0,  100,    2, 0x08 /* Private */,
+       4,    0,  101,    2, 0x08 /* Private */,
+       5,    0,  102,    2, 0x08 /* Private */,
+       6,    0,  103,    2, 0x08 /* Private */,
+       7,    1,  104,    2, 0x08 /* Private */,
+      10,    2,  107,    2, 0x08 /* Private */,
+      13,    0,  112,    2, 0x08 /* Private */,
+      14,    0,  113,    2, 0x08 /* Private */,
+      15,    0,  114,    2, 0x08 /* Private */,
+      16,    0,  115,    2, 0x08 /* Private */,
+      17,    1,  116,    2, 0x08 /* Private */,
+      19,    1,  119,    2, 0x08 /* Private */,
+      21,    0,  122,    2, 0x08 /* Private */,
+      22,    0,  123,    2, 0x08 /* Private */,
+      23,    0,  124,    2, 0x08 /* Private */,
+      24,    0,  125,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -114,6 +120,8 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,   18,
     QMetaType::Void, QMetaType::Int,   20,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -141,6 +149,8 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 12: _t->on_volumeControl_spin_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 13: _t->on_actionPopupTitleEntry_editingFinished(); break;
         case 14: _t->on_actionPopupTextEntry_textChanged(); break;
+        case 15: _t->on_selectAudioFileButton_clicked(); break;
+        case 16: _t->on_selectAudioFileLineEdit_editingFinished(); break;
         default: ;
         }
     }
@@ -171,13 +181,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 15)
+        if (_id < 17)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 15;
+        _id -= 17;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 15)
+        if (_id < 17)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 15;
+        _id -= 17;
     }
     return _id;
 }

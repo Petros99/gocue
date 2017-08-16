@@ -24,11 +24,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    actionplayaudiofilegui.cpp \
+    actionpopupgui.cpp \
+    actionpopupgui.cpp \
+    actionplayaudiofilegui.cpp \
+    saveandopen.cpp \
+    cue.cpp
 
 CONFIG += c++14
 
 HEADERS  += mainwindow.h \
-    cue.h
+    cue.h \
+    actionpopupgui.h
 
 FORMS    += mainwindow.ui
+
+DISTFILES += \
+    todo.txt

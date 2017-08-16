@@ -2,7 +2,6 @@
 #include "ui_mainwindow.h"
 #include <QFileDialog>
 #include <QDir>
-#include "cue.h"
 #include <QObject>
 #include <QVector>
 #include <QString>
@@ -42,7 +41,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->actionNoneSettings->show();
    }
 
-
 MainWindow::~MainWindow() {
     delete ui;
 }
@@ -68,7 +66,6 @@ void MainWindow::insertCue(Cue * cue) {
     cue_vector.insert(cue_vector.begin() + index, cue);  // add the cue to the vector
 
 }
-
 
 void MainWindow::on_go_button_clicked()
 {
@@ -105,6 +102,12 @@ void MainWindow::newCue(int type, QString note) {
         break;
     }
     }
+    if (ui->cue_list->rowCount() == 1) {
+        qDebug() << "one row";
+        ui->cue_list->selectRow(0);
+        clear_actionSettings();
+        cue_vector.at(0)->show_ui(ui);
+    }
 }
 
 void MainWindow::on_add_clicked()
@@ -134,77 +137,13 @@ void MainWindow::on_remove_clicked()
         ui->cue_list->selectRow(index + 1);
     }
     cue_vector.remove(index);
-    ui->cue_list->removeRow(index);  // TODO crashes the program
+    ui->cue_list->removeRow(index);
     if (cue_vector.size() == index) ui->cue_list->selectRow(index -1);
 }
 
-void MainWindow::on_actionopen_triggered() {
-    QString f_name = QFileDialog::getOpenFileName(nullptr, tr("Open File"),
-                                                    "",
-                                                    tr("JSON (*.json)"));
-    QFile in_file(f_name);
-
-    if (!in_file.open(QIODevice::ReadOnly)) {
-        qWarning("Could not open file.");
-    }
-
-    QByteArray in_data = in_file.readAll();  // file to byte array
-
-    QJsonParseError error;  // holds errors
-    QJsonDocument json_cues_doc = QJsonDocument::fromJson(in_data, &error);
-
-    QJsonArray json_cues_vector = json_cues_doc.array();
-     // byte array to json array
-
-    // reset stuffs
-    cue_vector.clear();
-    ui->cue_list->clear();
-    set_cue_list();
-
-    for (int i = 0; i < json_cues_vector.size(); ++i) {
-        QJsonObject current_json_obj = json_cues_vector.at(i).toObject();
-        // vector item to json object
-        newCue(current_json_obj["type"].toInt(), current_json_obj["note"].toString());
-        // json object to a cue, which is added to cue_vector
-    }
-
-}
-
-
-void MainWindow::on_actionsave_triggered()
-{
-    QString f_name = QFileDialog::getSaveFileName(nullptr, tr("Save File"),
-                                "",
-                                tr("JSON (*.json)"));
-    QFile out_file(f_name);
-    if (!out_file.open(QIODevice::WriteOnly)) {
-        qWarning("Could not save file!");
-        return;
-    }
-
-
-    QJsonArray cues;
-    for(int i = 0; i < cue_vector.size(); ++i) {
-        QJsonObject json_cue_obj;
-        cue_vector.at(i)->write(json_cue_obj);
-        // cue_vector to json cue vector
-        cues.append(json_cue_obj);
-    }
-
-    QJsonDocument json_cues_doc;
-    json_cues_doc.setArray(cues);
-
-    // json cue vector to json doc
-
-    QTextStream out (&out_file);
-//    out.setVersion(QDataStream::Qt_DefaultCompiledVersion);
-
-    QString out_text = json_cues_doc.toJson();
-    // json doc to text
-    out << out_text;
-    // text to file
-    out_file.close();
-}
+#include "saveandopen.cpp"
+#include "actionplayaudiofilegui.cpp"
+#include "actionpopupgui.cpp"
 
 void MainWindow::on_action_select_currentIndexChanged()
 {
@@ -216,26 +155,4 @@ void MainWindow::on_cue_list_itemSelectionChanged()
     clear_actionSettings();
     if (ui->cue_list->rowCount() == 1) return;  // if this is the last item
     cue_vector.at(ui->cue_list->currentItem()->row())->show_ui(MainWindow::ui);
-}
-
-void MainWindow::on_volumeControl_slide_valueChanged(int value)
-{
-   ((ActionPlayAudioFile *)cue_vector.at(ui->cue_list->currentItem()->row()))->volume = value;
-   ui->volumeControl_spin->setValue(value);
-}
-
-void MainWindow::on_volumeControl_spin_valueChanged(int value)
-{
-   ((ActionPlayAudioFile *)cue_vector.at(ui->cue_list->currentItem()->row()))->volume = value;
-   ui->volumeControl_slide->setValue(value);
-}
-
-void MainWindow::on_actionPopupTitleEntry_editingFinished()
-{
-   ((ActionPopup *)cue_vector.at(ui->cue_list->currentItem()->row()))->title = ui->actionPopupTitleEntry->text();
-}
-
-void MainWindow::on_actionPopupTextEntry_textChanged()
-{
-    ((ActionPopup *)cue_vector.at(ui->cue_list->currentItem()->row()))->text = ui->actionPopupTextEntry->toPlainText();
 }

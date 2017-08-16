@@ -6,9 +6,8 @@
 #include <QTreeWidget>
 #include <QtGui>
 #include <QMessageBox>
-#include "cue.h"
-#include <memory>
 
+#include <cue.h> // requried here for type cue, also requried by mainwindow.cpp
 
 namespace Ui {
 class MainWindow;
@@ -25,6 +24,7 @@ public:
     ~MainWindow();
 
 private slots:
+
     void on_actionopen_triggered();
 
     void on_go_button_clicked();
@@ -47,13 +47,17 @@ private slots:
 
     void clear_actionSettings();
 
+    void on_actionPopupTitleEntry_editingFinished();
+
+    void on_actionPopupTextEntry_textChanged();
+
     void on_volumeControl_slide_valueChanged(int value);
 
     void on_volumeControl_spin_valueChanged(int arg1);
 
-    void on_actionPopupTitleEntry_editingFinished();
+    void on_selectAudioFileButton_clicked();
 
-    void on_actionPopupTextEntry_textChanged();
+    void on_selectAudioFileLineEdit_editingFinished();
 
 private:
     Ui::MainWindow *ui;

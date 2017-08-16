@@ -18,6 +18,7 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLCDNumber>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
@@ -62,11 +63,17 @@ public:
     QTextEdit *actionPopupTextEntry;
     QFrame *actionPlayAudioFileSettings;
     QWidget *layoutWidget2;
+    QVBoxLayout *verticalLayout_4;
     QHBoxLayout *horizontalLayout_2;
     QLabel *volumeControlLabel;
     QGridLayout *gridLayout;
     QSpinBox *volumeControl_spin;
     QSlider *volumeControl_slide;
+    QHBoxLayout *horizontalLayout_3;
+    QPushButton *selectAudioFileButton;
+    QLineEdit *selectAudioFileLineEdit;
+    QLCDNumber *playbackPassedLcd;
+    QLCDNumber *playbackRemainLcd;
     QFrame *actionNoneSettings;
     QVBoxLayout *verticalLayout_3;
     QLabel *no_selected_cue_label;
@@ -186,12 +193,16 @@ public:
         actionPlayAudioFileSettings->setFrameShadow(QFrame::Sunken);
         layoutWidget2 = new QWidget(actionPlayAudioFileSettings);
         layoutWidget2->setObjectName(QStringLiteral("layoutWidget2"));
-        layoutWidget2->setGeometry(QRect(0, 0, 331, 31));
-        horizontalLayout_2 = new QHBoxLayout(layoutWidget2);
+        layoutWidget2->setGeometry(QRect(0, 0, 331, 61));
+        verticalLayout_4 = new QVBoxLayout(layoutWidget2);
+        verticalLayout_4->setSpacing(6);
+        verticalLayout_4->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
+        verticalLayout_4->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
-        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        horizontalLayout_2->setContentsMargins(3, 0, 0, 0);
+        horizontalLayout_2->setContentsMargins(3, -1, -1, -1);
         volumeControlLabel = new QLabel(layoutWidget2);
         volumeControlLabel->setObjectName(QStringLiteral("volumeControlLabel"));
         QFont font;
@@ -231,6 +242,31 @@ public:
 
         horizontalLayout_2->addLayout(gridLayout);
 
+
+        verticalLayout_4->addLayout(horizontalLayout_2);
+
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setSpacing(6);
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        selectAudioFileButton = new QPushButton(layoutWidget2);
+        selectAudioFileButton->setObjectName(QStringLiteral("selectAudioFileButton"));
+
+        horizontalLayout_3->addWidget(selectAudioFileButton);
+
+        selectAudioFileLineEdit = new QLineEdit(layoutWidget2);
+        selectAudioFileLineEdit->setObjectName(QStringLiteral("selectAudioFileLineEdit"));
+
+        horizontalLayout_3->addWidget(selectAudioFileLineEdit);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_3);
+
+        playbackPassedLcd = new QLCDNumber(actionPlayAudioFileSettings);
+        playbackPassedLcd->setObjectName(QStringLiteral("playbackPassedLcd"));
+        playbackPassedLcd->setGeometry(QRect(10, 90, 64, 23));
+        playbackRemainLcd = new QLCDNumber(actionPlayAudioFileSettings);
+        playbackRemainLcd->setObjectName(QStringLiteral("playbackRemainLcd"));
+        playbackRemainLcd->setGeometry(QRect(250, 100, 64, 23));
         actionNoneSettings = new QFrame(centralWidget);
         actionNoneSettings->setObjectName(QStringLiteral("actionNoneSettings"));
         actionNoneSettings->setGeometry(QRect(570, 10, 331, 521));
@@ -249,12 +285,12 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         layoutWidget->raise();
         layoutWidget->raise();
-        actionPlayAudioFileSettings->raise();
         actionNoneSettings->raise();
         actionPopupSettings->raise();
+        actionPlayAudioFileSettings->raise();
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 944, 23));
+        menuBar->setGeometry(QRect(0, 0, 944, 20));
         menugocue = new QMenu(menuBar);
         menugocue->setObjectName(QStringLiteral("menugocue"));
         MainWindow->setMenuBar(menuBar);
@@ -295,6 +331,7 @@ public:
         actionPopupTitleEntry->setPlaceholderText(QApplication::translate("MainWindow", "popup title", Q_NULLPTR));
         actionPopupTextEntry->setPlaceholderText(QApplication::translate("MainWindow", "popup text", Q_NULLPTR));
         volumeControlLabel->setText(QApplication::translate("MainWindow", "volume", Q_NULLPTR));
+        selectAudioFileButton->setText(QApplication::translate("MainWindow", "select file", Q_NULLPTR));
         no_selected_cue_label->setText(QApplication::translate("MainWindow", "please select a cue", Q_NULLPTR));
         menugocue->setTitle(QApplication::translate("MainWindow", "File", Q_NULLPTR));
     } // retranslateUi
