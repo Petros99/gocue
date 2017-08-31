@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ActionPlayAudioFileGui</class>
+ <widget class="QWidget" name="ActionPlayAudioFileGui">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>331</width>
+    <height>521</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QSlider" name="volume_slider">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>250</y>
+     <width>160</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="maximum">
+    <number>100</number>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="mute_button">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>250</y>
+     <width>41</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>mute</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="play_button">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>40</y>
+     <width>41</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>play</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pause_button">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>40</y>
+     <width>51</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>pause</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="file_path_line">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>251</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>file path</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pick_file_button">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>10</y>
+     <width>51</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>choose</string>
+   </property>
+  </widget>
+  <widget class="QLCDNumber" name="passed_lcd">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>80</y>
+     <width>101</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="digitCount">
+    <number>6</number>
+   </property>
+  </widget>
+  <widget class="QLCDNumber" name="remain_lcd">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>80</y>
+     <width>101</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="digitCount">
+    <number>6</number>
+   </property>
+  </widget>
+  <widget class="QLabel" name="passed_label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>110</y>
+     <width>81</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>time passed</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="remain_label">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>110</y>
+     <width>81</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>time remain</string>
+   </property>
+  </widget>
+  <widget class="QSlider" name="scrub_slider">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>140</y>
+     <width>311</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QLCDNumber" name="length_lcd">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>80</y>
+     <width>101</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Box</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <property name="lineWidth">
+    <number>1</number>
+   </property>
+   <property name="digitCount">
+    <number>6</number>
+   </property>
+  </widget>
+  <widget class="QLabel" name="length_label">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>110</y>
+     <width>64</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>length</string>
+   </property>
+  </widget>
+  <widget class="QDoubleSpinBox" name="begin_spin">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>170</y>
+     <width>82</width>
+     <height>27</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QDoubleSpinBox" name="end_spin">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>170</y>
+     <width>82</width>
+     <height>27</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="unmute_button">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>250</y>
+     <width>61</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>unmute</string>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="volume_spin">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>250</y>
+     <width>55</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="maximum">
+    <number>100</number>
+   </property>
+  </widget>
+  <widget class="QLabel" name="staus_label">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>310</y>
+     <width>121</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

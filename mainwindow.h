@@ -7,7 +7,7 @@
 #include <QtGui>
 #include <QMessageBox>
 
-#include <cue.h> // requried here for type cue, also requried by mainwindow.cpp
+#include "cue.h"
 
 namespace Ui {
 class MainWindow;
@@ -50,14 +50,6 @@ private slots:
     void on_actionPopupTitleEntry_editingFinished();
 
     void on_actionPopupTextEntry_textChanged();
-
-    void on_volumeControl_slide_valueChanged(int value);
-
-    void on_volumeControl_spin_valueChanged(int arg1);
-
-    void on_selectAudioFileButton_clicked();
-
-    void on_selectAudioFileLineEdit_editingFinished();
 
 private:
     Ui::MainWindow *ui;

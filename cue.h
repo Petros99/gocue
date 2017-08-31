@@ -6,20 +6,21 @@
 #include <QJsonObject>  // read and write functions
 #include "ui_mainwindow.h"  // used for show ui functions
 
-class Cue {
-    // the base class for all cues
-public:  // no reason for any to be private or protected
-    QString note = "note";
+class Cue {  // abstract
+public:
+    QString note;
 
-    virtual int go();  // this base class version should never be called
+    virtual int go() = 0;
 
-    virtual int show_ui(Ui::MainWindow * ui);
+    virtual int show_ui(Ui::MainWindow * ui) = 0;
 
-    static const int cue_type;
+    virtual void hide_ui(Ui::MainWindow * ui) = 0;
 
-    virtual void read(const QJsonObject &json);  // for loading cues from file
+    static const int cue_type = -1;
 
-    virtual void write(QJsonObject &json) const; // for writing cues to file
+    virtual void read(const QJsonObject &json) = 0;  // for loading cues from file
+
+    virtual void write(QJsonObject &json) const = 0; // for writing cues to file
 };
 
 class ActionPopup : public Cue {
@@ -29,9 +30,11 @@ public:
     QString text = "default text";
     QString title = "default title";
 
-    int go() override final;
+    int go() override final;  // TODO, required?
 
     int show_ui(Ui::MainWindow * ui) override final;
+
+    void hide_ui(Ui::MainWindow * ui) override final;
 
     void read(const QJsonObject &json);
 
@@ -53,9 +56,21 @@ public:
 
     int show_ui(Ui::MainWindow * ui) override final;
 
+    void hide_ui(Ui::MainWindow * ui) override final;
+
     void read(const QJsonObject &json);
 
     void write(QJsonObject &json) const;
+
+    bool muted = true;  // TODO, save
+
+
+    // -1 means that time is unspecified
+    // begin_time is in ms
+    int begin_time = -1;
+
+    // stop_time is in ms
+    int stop_time = -1;
 
 };
 

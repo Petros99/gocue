@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <QJsonArray>
 
+
 QVector<Cue *> cue_vector;  // holds pointers to every cue in order
 int current_row = 0;  // for cue_list gui element
 int curr_cue_action_index = 0; // popup action is index 0
@@ -25,7 +26,7 @@ void MainWindow::set_cue_list() {  // "reset" the cue_list element
 }
 
 void MainWindow::clear_actionSettings() {  // hide settings for all cue groups and no cue
-    ui->actionPlayAudioFileSettings->hide();
+    ui->action_play_audio_file_gui->hide();
     ui->actionPopupSettings->hide();
     ui->actionNoneSettings->hide();
 }
@@ -93,14 +94,6 @@ void MainWindow::newCue(int type, QString note) {
         insertCue(cue);
         break;
     }
-    default:  // should never happen
-    {
-        Cue * cue = new Cue;
-        cue->note = note;
-        insertCue(cue);
-        qWarning("Something bad happened in newCue (default).");
-        break;
-    }
     }
     if (ui->cue_list->rowCount() == 1) {
         qDebug() << "one row";
@@ -142,7 +135,6 @@ void MainWindow::on_remove_clicked()
 }
 
 #include "saveandopen.cpp"
-#include "actionplayaudiofilegui.cpp"
 #include "actionpopupgui.cpp"
 
 void MainWindow::on_action_select_currentIndexChanged()
@@ -152,7 +144,9 @@ void MainWindow::on_action_select_currentIndexChanged()
 
 void MainWindow::on_cue_list_itemSelectionChanged()
 {
-    clear_actionSettings();
+    clear_actionSettings();  // TODO, remove this function, hide each cue individualy
     if (ui->cue_list->rowCount() == 1) return;  // if this is the last item
-    cue_vector.at(ui->cue_list->currentItem()->row())->show_ui(MainWindow::ui);
+    cue_vector.at(current_row)->hide_ui(MainWindow::ui);  // hide the old ui
+    current_row = ui->cue_list->currentItem()->row();
+    cue_vector.at(current_row)->show_ui(MainWindow::ui);  // show the new ui
 }

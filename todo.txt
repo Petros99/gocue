@@ -1,3 +1,28 @@
+types of cues:
+play audoio file
+play soudn effect
+play video file
+run script
+emmit midi
+run command
+launch command
+launce program
+set dmx
+blocking wait
+change pc setting
+begin auto exec
+end auto exec
+
+// possible features
+remove the file path input
+arrows to move cues
+runa as server
+autosave
+run from ram
+notify if media playing in cue
+go button should stop prev media playback
+begin and end spinners should affect playback
+ensure seekbar is connected to correct cue and that it works
 ui code should be seperated
 controls for audio playback cue
 is ready function
