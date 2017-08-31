@@ -3,4 +3,9 @@
 *.mp3
 *.wav
 *.user*
+moc_*
+ui_*
 gocue
+release
+debug
+todo.txt
