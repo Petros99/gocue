@@ -243,7 +243,7 @@
     <number>100</number>
    </property>
   </widget>
-  <widget class="QLabel" name="staus_label">
+  <widget class="QLabel" name="status_label">
    <property name="geometry">
     <rect>
      <x>110</x>

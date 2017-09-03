@@ -186,37 +186,37 @@ void ActionPlayAudioFileGui::setMediaInfo(QMediaPlayer::MediaStatus status){
 
     // tell user the media status
     if (status == QMediaPlayer::InvalidMedia) {
-        ui->status_lable->setText("Invalid Media");
+        ui->status_label->setText("Invalid Media");
     }
     else if (status == QMediaPlayer::LoadingMedia) {
-        ui->status_lable->setText("Loading Media");
+        ui->status_label->setText("Loading Media");
     }
     else if (status == QMediaPlayer::NoMedia) {
-        ui->status_lable->setText("No Media");
+        ui->status_label->setText("No Media");
     }
     else if (status == QMediaPlayer::UnknownMediaStatus) {
-        ui->status_lable->setText("Unknown Media Status");
+        ui->status_label->setText("Unknown Media Status");
     }
     else if (target_cue->player->duration() < 1) {
-        ui->status_lable->setText("Negative Duration");
+        ui->status_label->setText("Negative Duration");
     }
     else if (target_cue->player->duration() > INT32_MAX) {
-        ui->status_lable->setText("Duration Overflow");
+        ui->status_label->setText("Duration Overflow");
     }
     else if (status == QMediaPlayer::BufferedMedia) {
-        ui->status_lable->setText("Media Buffered");
+        ui->status_label->setText("Media Buffered");
     }
     else if (status == QMediaPlayer::BufferingMedia) {
-        ui->status_lable->setText("Media Buffering");
+        ui->status_label->setText("Media Buffering");
     }
     else if (status == QMediaPlayer::AccessDeniedError) {
-        ui->status_lable->setText("Access Denied");
+        ui->status_label->setText("Access Denied");
     }
     else if (status == QMediaPlayer::EndOfMedia) {
-        ui->status_lable->setText("Done Playing");
+        ui->status_label->setText("Done Playing");
     }
     else {
-        ui->status_lable->setText("no status availible");
+        ui->status_label->setText("no status availible");
     }
     // TODO, finish this list
 
