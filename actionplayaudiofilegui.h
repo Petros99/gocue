@@ -56,7 +56,7 @@ private slots:
 
     void update_volume(int vol);
 
-    void setPlayButtons(qreal rate);
+    void setPlayButtons(QMediaPlayer::State state);
 
 private:
     ActionPlayAudioFile * target_cue;

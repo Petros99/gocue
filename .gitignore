@@ -10,3 +10,4 @@ release
 debug
 todo.txt
 .qmake*
+Makefile

@@ -9,6 +9,7 @@ ActionPlayAudioFileGui::ActionPlayAudioFileGui(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ActionPlayAudioFileGui)
 {
+    qDebug() << "APAFG constructor";
     ui->setupUi(this);
     setDisabledMediaInteraction(true);
 
@@ -16,10 +17,12 @@ ActionPlayAudioFileGui::ActionPlayAudioFileGui(QWidget *parent) :
 
 ActionPlayAudioFileGui::~ActionPlayAudioFileGui()
 {
+    qDebug() << "APAFG destructor";
     delete ui;
 }
 
 void ActionPlayAudioFileGui::start(ActionPlayAudioFile * cue) {
+    qDebug() << "start";
     // this function is called when the target_cue is known
 
     target_cue = cue; // we now know of target_cue
@@ -47,11 +50,12 @@ void ActionPlayAudioFileGui::start(ActionPlayAudioFile * cue) {
     ui->pause_button->setDisabled(true);
     // when playing, play button should be disabled, and pause button enabled
 
-    connect(target_cue->player, SIGNAL(playbackRateChanged(qreal)), this, SLOT(setPlayButtons(qreal)));
+    connect(target_cue->player, SIGNAL(stateChanged(QMediaPlayer::State)), this, SLOT(setPlayButtons(QMediaPlayer::State)));
 
     // update the gui (scrub_slider, lcds, etc) every 25 ms, or 40 times a sec.
     target_cue->player->setNotifyInterval(25);
 
+    target_cue->player->setPosition(ui->scrub_slider->value()); // probably bad
     connect(  // when the player's position changes, update the scrub_slider
                 target_cue->player, SIGNAL(positionChanged(qint64)),
                   this, SLOT(set_position(qint64)));
@@ -64,6 +68,7 @@ void ActionPlayAudioFileGui::start(ActionPlayAudioFile * cue) {
 }
 
 void ActionPlayAudioFileGui::update_volume(int vol) {
+    qDebug() << "update volume";
    ui->volume_slider->setValue(vol);  // TODO, needs to be tested
    ui->volume_spin->setValue(vol);
 
@@ -75,9 +80,10 @@ void ActionPlayAudioFileGui::update_volume(int vol) {
    target_cue->player->setVolume(qRound(linearVolume * 100));
 }
 
-void ActionPlayAudioFileGui::setPlayButtons(qreal rate) {
+void ActionPlayAudioFileGui::setPlayButtons(QMediaPlayer::State state) {
+    qDebug() << "set play buttons";
     // if playing, enable the pause button and disable the play button
-    if (rate != 0) {
+    if (state == QMediaPlayer::PlayingState) {
         ui->pause_button->setEnabled(true);
         ui->play_button->setDisabled(true);
     }
@@ -88,6 +94,7 @@ void ActionPlayAudioFileGui::setPlayButtons(qreal rate) {
 }
 
 void ActionPlayAudioFileGui::setDisabledMediaInteraction(bool disabled) {
+    qDebug() << "set disabled media interaction";
     // disables/enables the media interatction widgests
     ui->play_button->setDisabled(disabled);
     ui->pause_button->setDisabled(disabled);
@@ -103,6 +110,7 @@ void ActionPlayAudioFileGui::setDisabledMediaInteraction(bool disabled) {
 }
 
 void ActionPlayAudioFileGui::stop() {
+    qDebug() << "stop";
     // called when unselected
 
     // disconnect everything connected to all signals in player
@@ -121,24 +129,25 @@ void ActionPlayAudioFileGui::stop() {
 }
 
 void ActionPlayAudioFileGui::loadMedia(qint64 dur) {
+    qDebug() << "load media";
     (void)(dur);  // dur is unused,
                  // but required for connecting this func. to durrationChanged
     this->setMediaInfo(target_cue->player->mediaStatus());
 }
 
-void ActionPlayAudioFileGui::on_mute_button_clicked()
-{
+void ActionPlayAudioFileGui::on_mute_button_clicked() {
+    qDebug() << "on mute button clicked";
     target_cue->player->setMuted(true);
     target_cue->muted = false;
 }
 
-void ActionPlayAudioFileGui::on_file_path_line_editingFinished()
-{
+void ActionPlayAudioFileGui::on_file_path_line_editingFinished() {
+    qDebug() << "on file path line editing finished";
    target_cue->player->setMedia(QUrl::fromLocalFile(ui->file_path_line->text()));
 }
 
-void ActionPlayAudioFileGui::on_pick_file_button_clicked()
-{
+void ActionPlayAudioFileGui::on_pick_file_button_clicked() {
+    qDebug() << "on pick file button clicked";
    QString new_file = QFileDialog::getOpenFileName(this, tr("Selct Your File"),"", tr("Audio (*.mp3 *.wav *.ogg *.wma *.aiff *.m4a *.wmv)"));
    // TODO: the avalable file types should be dependent on OS, or gstreamer should be integrated
    target_cue->player->setMedia(QUrl::fromLocalFile(new_file));
@@ -181,9 +190,7 @@ void ActionPlayAudioFileGui::set_time_passed(qint64 poss) {
 }
 
 void ActionPlayAudioFileGui::setMediaInfo(QMediaPlayer::MediaStatus status){
-
-
-
+    qDebug() << "set media info";
     // tell user the media status
     if (status == QMediaPlayer::InvalidMedia) {
         ui->status_label->setText("Invalid Media");
@@ -216,7 +223,7 @@ void ActionPlayAudioFileGui::setMediaInfo(QMediaPlayer::MediaStatus status){
         ui->status_label->setText("Done Playing");
     }
     else {
-        ui->status_label->setText("no status availible");
+        ui->status_label->setText(target_cue->player->errorString());
     }
     // TODO, finish this list
 
@@ -238,6 +245,7 @@ void ActionPlayAudioFileGui::setMediaInfo(QMediaPlayer::MediaStatus status){
           )
     {
         setDisabledMediaInteraction(true);  // do not allow the user use media file
+        ui->status_label->setText(QString().number(status));
         // TODO, tell the user what is broken
     }
 
